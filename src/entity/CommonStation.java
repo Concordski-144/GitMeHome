@@ -14,7 +14,7 @@ class CommonStation implements Station {
     private final Integer[] transit_modes;
     private double distance_from_user;
     private final Line[] lines;
-    private ArrayList<Delays> delays = new ArrayList<Delays>();
+    private ArrayList<Delay> delays = new ArrayList<Delay>();
 
     CommonStation(String name, String id, double longitude, double latitude, boolean accesibility, Integer[] transit_modes, Line[] lines) {
         this.name = name;
@@ -65,12 +65,12 @@ class CommonStation implements Station {
     }
 
     @Override
-    public ArrayList<Delays> getDelays() {
+    public ArrayList<Delay> getDelays() {
         return delays;
     }
 
     @Override
-    public void setDelays(ArrayList<Delays> delays) {
+    public void setDelays(ArrayList<Delay> delays) {
         this.delays = delays;
     }
 

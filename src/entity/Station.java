@@ -10,6 +10,6 @@ public interface Station {
     Integer[] getTransitModes();
     double getDistanceFromUser();
     Line[] getLines();
-    ArrayList<Delays> getDelays();
-    void setDelays(ArrayList<Delays> delays);
+    ArrayList<Delay> getDelays();
+    void setDelays(ArrayList<Delay> delays);
 }
