@@ -6,8 +6,6 @@ public interface Route {
     String getName();
     String getid();
     String getType();
-    double[] getCoordinates();
-    void setCoordinates(double[] coordinates);
     Station[] getRoute();
     Station getDestination();
     ArrayList<Integer> getDepartureTimes();

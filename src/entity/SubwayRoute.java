@@ -7,17 +7,13 @@ class SubwayRoute implements Route {
     private final String name;
     private final String id;
     private final String type = "subway";
-    private double longitude;
-    private double latitude;
     private final Station[] stations;
     private ArrayList<Integer> departureTimes;
     private ArrayList<Delay> delays = new ArrayList<>();
 
-    SubwayRoute(String name, String id, double longitude, double latitude, Station[] stations) {
+    SubwayRoute(String name, String id, Station[] stations) {
         this.name = name;
         this.id = id;
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.stations = stations;
     }
 
@@ -34,20 +30,6 @@ class SubwayRoute implements Route {
     @Override
     public String getType() {
         return type;
-    }
-
-    @Override
-    public double[] getCoordinates() {
-        double[] coords = new double[2];
-        coords[0] = this.longitude;
-        coords[1] = this.latitude;
-        return coords;
-    }
-
-    @Override
-    public void setCoordinates(double[] coordinates) {
-        this.longitude = coordinates[0];
-        this.latitude = coordinates[1];
     }
 
     @Override
