@@ -11,17 +11,17 @@ class CommonStation implements Station {
     private final boolean accessibility;
     private final Integer[] transit_modes;
     private double distance_from_user;
-    private final Line[] lines;
+    private final Route[] routes;
     private ArrayList<Delay> delays = new ArrayList<Delay>();
 
-    CommonStation(String name, String id, double longitude, double latitude, boolean accessibility, Integer[] transit_modes, Line[] lines) {
+    CommonStation(String name, String id, double longitude, double latitude, boolean accessibility, Integer[] transit_modes, Route[] routes) {
         this.name = name;
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
         this.accessibility = accessibility;
         this.transit_modes = transit_modes;
-        this.lines = lines;
+        this.routes = routes;
     }
 
     @Override
@@ -58,8 +58,8 @@ class CommonStation implements Station {
     }
 
     @Override
-    public Line[] getLines() {
-        return lines;
+    public Route[] getLines() {
+        return routes;
     }
 
     @Override

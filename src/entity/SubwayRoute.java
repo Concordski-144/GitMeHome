@@ -2,18 +2,18 @@ package entity;
 
 import java.util.ArrayList;
 
-class CommonLine implements Line {
+class SubwayRoute implements Route {
 
     private final String name;
     private final String id;
-    private final String type = "line";
+    private final String type = "subway";
     private double longitude;
     private double latitude;
     private final Station[] stations;
     private ArrayList<Integer> departureTimes;
     private ArrayList<Delay> delays = new ArrayList<>();
 
-    CommonLine(String name, String id, double longitude, double latitude, Station[] stations) {
+    SubwayRoute(String name, String id, double longitude, double latitude, Station[] stations) {
         this.name = name;
         this.id = id;
         this.longitude = longitude;

@@ -9,7 +9,7 @@ public interface Station {
     boolean getAccessibility();
     Integer[] getTransitModes();
     double getDistanceFromUser();
-    Line[] getLines();
+    Route[] getLines();
     ArrayList<Delay> getDelays();
     void setDelays(ArrayList<Delay> delays);
 }

@@ -10,16 +10,16 @@ class CommonDelay implements Delay {
     private String delay_status;
     private final int start_time;
     private int end_time_estimated;
-    private final ArrayList<Line> affected_lines;
+    private final ArrayList<Route> affected_routes;
 
-    CommonDelay(String name, String id, String delay_type, String delay_status, int start_time, int end_time_estimated, ArrayList<Line> affected_lines) {
+    CommonDelay(String name, String id, String delay_type, String delay_status, int start_time, int end_time_estimated, ArrayList<Route> affected_routes) {
         this.name = name;
         this.id = id;
         this.delay_type = delay_type;
         this.delay_status = delay_status;
         this.start_time = start_time;
         this.end_time_estimated = end_time_estimated;
-        this.affected_lines = affected_lines;
+        this.affected_routes = affected_routes;
     }
 
     @Override
@@ -33,8 +33,8 @@ class CommonDelay implements Delay {
     }
 
     @Override
-    public ArrayList<Line> getAffectedLines() {
-        return affected_lines;
+    public ArrayList<Route> getAffectedLines() {
+        return affected_routes;
     }
 
     @Override

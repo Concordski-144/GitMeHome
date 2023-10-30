@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public interface Line {
+public interface Route {
     String getName();
     String getid();
     String getType();

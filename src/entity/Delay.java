@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface Delay {
     String getName();
     String getid();
-    ArrayList<Line> getAffectedLines();
+    ArrayList<Route> getAffectedLines();
     String getDelayType();
     String getDelayStatus();
     int getStartTime();
