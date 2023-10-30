@@ -1,7 +1,5 @@
 package entity;
 
-import java.sql.Array;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 class CommonDelay implements Delay {
@@ -12,9 +10,9 @@ class CommonDelay implements Delay {
     private String delay_status;
     private final int start_time;
     private int end_time_estimated;
-    private final Line[] affected_lines;
+    private final ArrayList<Line> affected_lines;
 
-    CommonDelay(String name, String id, String delay_type, String delay_status, int start_time, int end_time_estimated, Line[] affected_lines) {
+    CommonDelay(String name, String id, String delay_type, String delay_status, int start_time, int end_time_estimated, ArrayList<Line> affected_lines) {
         this.name = name;
         this.id = id;
         this.delay_type = delay_type;
@@ -35,7 +33,7 @@ class CommonDelay implements Delay {
     }
 
     @Override
-    public Line[] getAffectedLines() {
+    public ArrayList<Line> getAffectedLines() {
         return affected_lines;
     }
 
