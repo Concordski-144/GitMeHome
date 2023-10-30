@@ -6,6 +6,7 @@ import use_case.next_departures.NextDeparturesInputData;
 public class NextDeparturesController {
 
     final NextDeparturesInputBoundary nextDeparturesUseCaseInteractor;
+
     public NextDeparturesController(NextDeparturesInputBoundary nextDeparturesInteractor) {
         this.nextDeparturesUseCaseInteractor = nextDeparturesInteractor;
     }
