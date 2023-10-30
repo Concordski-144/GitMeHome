@@ -6,7 +6,7 @@ public interface Station {
     String getName();
     String getid();
     double[] getCoordinates();
-    boolean getAccesibility();
+    boolean getAccessibility();
     Integer[] getTransitModes();
     double getDistanceFromUser();
     Line[] getLines();
