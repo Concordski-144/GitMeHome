@@ -1,4 +1,4 @@
-package interface_adapter.next_departures;
+package interface_adapter.NextDepartures;
 
 import use_case.next_departures.NextDeparturesInputBoundary;
 import use_case.next_departures.NextDeparturesInputData;
