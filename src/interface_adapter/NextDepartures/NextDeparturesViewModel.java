@@ -9,4 +9,8 @@ public class NextDeparturesViewModel {
 
     public static void getDeparturesError(NextDepartureOutputData error) {
     }
+
+    public static NextDeparturesState getState() {
+        return nextDepartures;
+    }
 }
