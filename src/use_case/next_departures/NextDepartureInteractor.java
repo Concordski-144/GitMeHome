@@ -5,13 +5,13 @@ import entity.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NextDeparturesInteractor implements NextDeparturesInputBoundary{
+public class NextDepartureInteractor implements NextDepartureInputBoundary {
     final NextDepartureDataAccessInterface nextDepartureDataAccessObject;
-    final NextDeparturesInputBoundary nextDeparturesPresenter;
+    final NextDepartureOutputBoundary nextDeparturePresenter;
 
-    public NextDeparturesInteractor(NextDepartureDataAccessInterface nextDepartureDataAccessObject, NextDeparturesInputBoundary nextDeparturesPresenter) {
+    public NextDepartureInteractor(NextDepartureDataAccessInterface nextDepartureDataAccessObject, NextDepartureOutputBoundary nextDeparturesPresenter) {
         this.nextDepartureDataAccessObject = nextDepartureDataAccessObject;
-        this.nextDeparturesPresenter = nextDeparturesPresenter;
+        this.nextDeparturePresenter = nextDeparturesPresenter;
     }
 
 
@@ -26,6 +26,6 @@ public class NextDeparturesInteractor implements NextDeparturesInputBoundary{
                 break;
             }
         }
-        nextDeparturesPresenter.prepareSuccessView(nextDepartureOutputData);
+        nextDeparturePresenter.prepareSuccessView(nextDepartureOutputData);
     }
 }
