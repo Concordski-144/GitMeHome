@@ -7,9 +7,10 @@ import java.util.List;
 
 public class NextDeparturesInteractor implements NextDeparturesInputBoundary{
     final NextDepartureDataAccessInterface nextDepartureDataAccessObject;
-    final NextDeparturesInputBoundary nextDeparturesPresenter;
+    final NextDeparturesOutputBoundary nextDeparturesPresenter;
 
-    public NextDeparturesInteractor(NextDepartureDataAccessInterface nextDepartureDataAccessObject, NextDeparturesInputBoundary nextDeparturesPresenter) {
+    public NextDeparturesInteractor(NextDepartureDataAccessInterface nextDepartureDataAccessObject,
+                                    NextDeparturesOutputBoundary nextDeparturesPresenter) {
         this.nextDepartureDataAccessObject = nextDepartureDataAccessObject;
         this.nextDeparturesPresenter = nextDeparturesPresenter;
     }
