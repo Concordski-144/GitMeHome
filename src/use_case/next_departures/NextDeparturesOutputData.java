@@ -1,13 +1,12 @@
 package use_case.next_departures;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class NextDepartureOutputData {
+public class NextDeparturesOutputData {
     private final ArrayList<Integer> departures;
     private boolean useCaseFailed;
 
-    public NextDepartureOutputData(ArrayList<Integer> departures, boolean useCaseFailed) {
+    public NextDeparturesOutputData(ArrayList<Integer> departures, boolean useCaseFailed) {
         this.departures = departures;
         this.useCaseFailed = useCaseFailed;
     }
