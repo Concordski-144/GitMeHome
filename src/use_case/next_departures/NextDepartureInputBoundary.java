@@ -1,5 +1,6 @@
 package use_case.next_departures;
 
-public interface NextDeparturesInputBoundary {
+public interface NextDepartureInputBoundary {
     void execute(NextDeparturesInputData nextDeparturesInputData);
+
 }
