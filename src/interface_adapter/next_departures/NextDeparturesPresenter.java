@@ -1,30 +1,39 @@
 package interface_adapter.next_departures;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.next_departures.NextDepartureState;
+import interface_adapter.next_departures.NextDepartureViewModel;
+import use_case.next_departures.NextDepartureOutputBoundary;
+import use_case.next_departures.NextDepartureOutputBoundary;
 import use_case.next_departures.NextDepartureOutputData;
-import use_case.next_departures.NextDeparturesOutputBoundary;
 
-public class NextDeparturesPresenter implements NextDeparturesOutputBoundary {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    private final NextDeparturesViewModel nextDeparturesViewModel;
+public class NextDeparturePresenter implements NextDepartureOutputBoundary {
 
-    private ViewManagerModel ViewManagerModel;
+    private final NextDepartureViewModel nextDepartureViewModel;
+    private ViewManagerModel viewManagerModel;
 
-    public NextDeparturesPresenter (ViewManagerModel viewManagerModel,
-                                    NextDeparturesViewModel nextDeparturesViewModel) {
-        this.nextDeparturesViewModel = nextDeparturesViewModel;
+    public NextDeparturePresenter(ViewManagerModel viewManagerModel,
+                                  NextDepartureViewModel nextDepartureViewModel) {
+        this.viewManagerModel = viewManagerModel;
+        this.nextDepartureViewModel = nextDepartureViewModel;
+    }
 
+
+    public void prepareSuccessView(NextDepartureOutputData response) {
+        NextDepartureState nextDepartureState = nextDepartureViewModel.getState();
+        nextDepartureState.setStationID(nextDepartureState.getStationID());
+        nextDepartureState.setTime(nextDepartureState.getTime());
+        nextDepartureState.setDepartureTime(nextDepartureState.getDepartureTime());
+        nextDepartureViewModel.firePropertyChanged();
     }
 
     @Override
-    public void prepareSuccessView(NextDepartureOutputData station) {
-        // once you get a good station id then get the next departures view
-        NextDeparturesViewModel.getNextDepartures(station);
-    }
-
-    @Override
-    public void prepareFailView(NextDepartureOutputData error) {
-        NextDeparturesState nextDeparturesState = NextDeparturesViewModel.getState();
-        NextDeparturesViewModel.getDeparturesError(error);
+    public void prepareFailView(String error) {
+        NextDepartureState nextDepartureState = nextDepartureViewModel.getState();
+        nextDepartureState.setStationIDError(error);
+        nextDepartureViewModel.firePropertyChanged();
     }
 }
