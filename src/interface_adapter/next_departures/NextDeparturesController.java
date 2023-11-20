@@ -12,8 +12,8 @@ public class NextDeparturesController {
     }
 
     public void execute(String id, int time) {
-        NextDeparturesInputData signupInputData = new NextDeparturesInputData(id, time);
+        NextDeparturesInputData nextDeparturesInputData = new NextDeparturesInputData(id, time);
 
-        nextDeparturesUseCaseInteractor.execute(signupInputData);
+        nextDeparturesUseCaseInteractor.execute(nextDeparturesInputData);
     }
 }
