@@ -1,15 +1,14 @@
-package interface_adapter.NextDepartures;
+package interface_adapter.next_departures;
 
+import interface_adapter.ViewManagerModel;
 import use_case.next_departures.NextDepartureOutputData;
 import use_case.next_departures.NextDeparturesOutputBoundary;
-
-import java.time.LocalDateTime;
 
 public class NextDeparturesPresenter implements NextDeparturesOutputBoundary {
 
     private final NextDeparturesViewModel nextDeparturesViewModel;
 
-    private ViewManagerModel;
+    private ViewManagerModel ViewManagerModel;
 
     public NextDeparturesPresenter (ViewManagerModel viewManagerModel,
                                     NextDeparturesViewModel nextDeparturesViewModel) {
