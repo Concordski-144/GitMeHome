@@ -3,6 +3,8 @@ package interface_adapter.next_departures;
 import use_case.next_departures.NextDepartureInputBoundary;
 import use_case.next_departures.NextDeparturesInputData;
 
+import java.time.LocalDateTime;
+
 public class NextDepartureController {
 
     final NextDepartureInputBoundary nextDepartureInteractor;
@@ -10,7 +12,7 @@ public class NextDepartureController {
         this.nextDepartureInteractor = nextDepartureInteractor;
     }
 
-    public void execute(String stationID, Integer time) {
+    public void execute(String stationID, LocalDateTime time) {
         NextDeparturesInputData nextDepartureInputData = new NextDeparturesInputData(
                 stationID, time);
 

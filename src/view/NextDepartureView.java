@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class NextDepartureView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -53,7 +54,7 @@ public class NextDepartureView extends JPanel implements ActionListener, Propert
                             NextDepartureState currentState = nextDepartureViewModel.getState();
 
                             nextDepartureController.execute(
-                                    currentState.getStationID(), currentState.getTime()
+                                    currentState.getStationID(), LocalDateTime.now()
                             );
                         }
                     }
@@ -91,7 +92,7 @@ public class NextDepartureView extends JPanel implements ActionListener, Propert
                     @Override
                     public void keyTyped(KeyEvent e) {
                         NextDepartureState currentState = nextDepartureViewModel.getState();
-                        currentState.setTime(timeInputField.getText() + e.getKeyChar());
+                        currentState.setTime(Integer.parseInt(timeInputField.getText() + e.getKeyChar()));
                         nextDepartureViewModel.setState(currentState);
                     }
 
