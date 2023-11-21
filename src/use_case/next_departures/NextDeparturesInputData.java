@@ -8,9 +8,10 @@ public class NextDeparturesInputData {
     final private String id;
     final private int time;
 
-    public NextDeparturesInputData(String id, int time) {
+    public NextDeparturesInputData(String id, LocalDateTime time) {
         this.id = id;
-        this.time = time;
+        ZoneId zoneId = ZoneId.systemDefault();
+        this.time = (int) time.atZone(zoneId).toEpochSecond();
     }
 
     String getId() {

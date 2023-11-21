@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NextDepartureOutputData {
-    private final ArrayList<Integer> departures;
+    private final HashMap<String, ArrayList<Integer>> departures;
     private boolean useCaseFailed;
 
-    public NextDepartureOutputData(ArrayList<Integer> departures, boolean useCaseFailed) {
+    public NextDepartureOutputData(HashMap<String, ArrayList<Integer>> departures, boolean useCaseFailed) {
         this.departures = departures;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public ArrayList<Integer> getDeparturesByRoute() {
+    public HashMap<String, ArrayList<Integer>> getDeparturesByRoute() {
         return departures;
     }
 }

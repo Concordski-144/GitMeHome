@@ -4,5 +4,5 @@ import entity.Route;
 import java.util.List;
 
 public interface NextDepartureDataAccessInterface {
-    List<Route> getNextDeparturesByRoute(String id);
+    List<Route> getNextDeparturesByRoute(String id, int time);
 }
