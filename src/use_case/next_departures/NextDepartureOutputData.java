@@ -1,18 +1,17 @@
 package use_case.next_departures;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NextDepartureOutputData {
-    private final HashMap<String, ArrayList<Integer>> departures;
+    private final HashMap<String, Integer[]> departuresByRoute;
     private boolean useCaseFailed;
 
-    public NextDepartureOutputData(HashMap<String, ArrayList<Integer>> departures, boolean useCaseFailed) {
-        this.departures = departures;
+    public NextDepartureOutputData(HashMap<String, Integer[]> departuresByRoute, boolean useCaseFailed) {
+        this.departuresByRoute = departuresByRoute;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public HashMap<String, ArrayList<Integer>> getDeparturesByRoute() {
-        return departures;
+    public HashMap<String, Integer[]> getDeparturesByRoute() {
+        return departuresByRoute;
     }
 }
