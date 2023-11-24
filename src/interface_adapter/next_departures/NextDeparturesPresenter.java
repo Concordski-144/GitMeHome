@@ -1,39 +1,31 @@
 package interface_adapter.next_departures;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.next_departures.NextDepartureState;
-import interface_adapter.next_departures.NextDepartureViewModel;
-import use_case.next_departures.NextDepartureOutputBoundary;
-import use_case.next_departures.NextDepartureOutputBoundary;
-import use_case.next_departures.NextDepartureOutputData;
+import use_case.next_departures.NextDeparturesOutputBoundary;
+import use_case.next_departures.NextDeparturesOutputData;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+public class NextDeparturesPresenter implements NextDeparturesOutputBoundary {
 
-public class NextDeparturePresenter implements NextDepartureOutputBoundary {
-
-    private final NextDepartureViewModel nextDepartureViewModel;
+    private final NextDeparturesViewModel nextDeparturesViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public NextDeparturePresenter(ViewManagerModel viewManagerModel,
-                                  NextDepartureViewModel nextDepartureViewModel) {
+    public NextDeparturesPresenter(ViewManagerModel viewManagerModel,
+                                   NextDeparturesViewModel nextDeparturesViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.nextDepartureViewModel = nextDepartureViewModel;
+        this.nextDeparturesViewModel = nextDeparturesViewModel;
     }
-
-
-    public void prepareSuccessView(NextDepartureOutputData response) {
-        NextDepartureState nextDepartureState = nextDepartureViewModel.getState();
-        nextDepartureState.setStationID(nextDepartureState.getStationID());
-        nextDepartureState.setTime(nextDepartureState.getTime());
-        nextDepartureState.setDepartureTime(nextDepartureState.getDepartureTime());
-        nextDepartureViewModel.firePropertyChanged();
+    public void prepareSuccessView(NextDeparturesOutputData response) {
+        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+        nextDeparturesState.setStationID(nextDeparturesState.getStationID());
+        nextDeparturesState.setTime(nextDeparturesState.getTime());
+        nextDeparturesState.setDepartureTime(nextDeparturesState.getDepartureTime());
+        nextDeparturesViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        NextDepartureState nextDepartureState = nextDepartureViewModel.getState();
-        nextDepartureState.setStationIDError(error);
-        nextDepartureViewModel.firePropertyChanged();
+        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+        nextDeparturesState.setStationIDError(error);
+        nextDeparturesViewModel.firePropertyChanged();
     }
 }
