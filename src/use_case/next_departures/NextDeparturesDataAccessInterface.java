@@ -3,6 +3,6 @@ import entity.Route;
 
 import java.util.List;
 
-public interface NextDepartureDataAccessInterface {
+public interface NextDeparturesDataAccessInterface {
     List<Route> getNextDeparturesByRoute(String id);
 }

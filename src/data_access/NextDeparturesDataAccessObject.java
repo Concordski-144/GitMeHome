@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NextDepartureDataAccessObject implements NextDepartureDataAccessInterface {
+public class NextDeparturesDataAccessObject implements NextDepartureDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/stop_departures";
     public static final String API_TOKEN = "";
 
