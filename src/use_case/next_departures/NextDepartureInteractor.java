@@ -19,7 +19,7 @@ public class NextDepartureInteractor implements NextDepartureInputBoundary {
     @Override
     public void execute(NextDeparturesInputData nextDeparturesInputData) {
         List<Route> routes = nextDepartureDataAccessObject.getNextDeparturesByRoute(nextDeparturesInputData.getId(), nextDeparturesInputData.getTime());
-        NextDepartureOutputData nextDepartureOutputData = null;
+        NextDepartureOutputData nextDepartureOutputData;
         HashMap<String, ArrayList<Integer>> departureTimes = null;
         for (Route route : routes) {
             ArrayList<Integer> routeDepartureTimes = route.getDepartureTimes();
