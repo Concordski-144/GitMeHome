@@ -4,7 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.next_departures.NextDepartureDataAccessInterface;
+import use_case.next_departures.NextDeparturesDataAccessInterface;
 import entity.Route;
 import entity.SubwayRoute;
 import entity.SubwayRouteFactory;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class NextDepartureDataAccessObject implements NextDepartureDataAccessInterface {
+public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/stop_departures";
     public static final String API_TOKEN = "";
 
