@@ -1,4 +1,4 @@
-package use_case.next_departure;
+package use_case.next_departures;
 
 import java.util.HashMap;
 

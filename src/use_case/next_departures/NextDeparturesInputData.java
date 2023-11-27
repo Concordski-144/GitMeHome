@@ -1,5 +1,8 @@
 package use_case.next_departures;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 public class NextDeparturesInputData {
 
     final private String id;
