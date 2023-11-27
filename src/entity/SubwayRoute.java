@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public class SubwayRoute implements Route {
+class SubwayRoute implements Route {
 
     private final String name;
     private final String id;
