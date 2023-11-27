@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class NextDepartureViewModel extends ViewModel {
+public class NextDeparturesViewModel extends ViewModel {
 
     public static final String NEXT_DEPARTURE_BUTTON_LABEL = "Next Departure";
     public static final String TITLE_LABEL = "Next Departure View";
@@ -14,13 +14,13 @@ public class NextDepartureViewModel extends ViewModel {
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
-    private NextDepartureState state = new NextDepartureState();
+    private NextDeparturesState state = new NextDeparturesState();
 
-    public NextDepartureViewModel() {
+    public NextDeparturesViewModel() {
         super("get departure time");
     }
 
-    public void setState(NextDepartureState state) {
+    public void setState(NextDeparturesState state) {
         this.state = state;
     }
 
@@ -36,7 +36,7 @@ public class NextDepartureViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public NextDepartureState getState() {
+    public NextDeparturesState getState() {
         return state;
     }
 }
