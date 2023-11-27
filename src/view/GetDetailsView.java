@@ -15,44 +15,48 @@ import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
 public class GetDetailsView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "next departure";
+    public final String viewName = "get details";
 
-    private final GetDetailsViewModel getDeTailsViewModel;
-    private final JTextField stationIDInputField = new JTextField(15);
+    private final GetDetailsViewModel getDetailsViewModel;
+    private final JTextField routeIDInputField = new JTextField(15);
 
     private final GetDetailsController getDetailsController;
 
     private final JButton getDetails;
     private final JButton cancel;
+    private final JButton departuretime;
+    public boolean withDepartureTime = false;
 
     public GetDetailsView(GetDetailsController controller, GetDetailsViewModel viewModel) {
 
         this.getDetailsController = controller;
-        this.getDeTailsViewModel = viewModel;
-        getDeTailsViewModel.addPropertyChangeListener(this);
+        this.getDetailsViewModel = viewModel;
+        getDetailsViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(GetDetailsViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel stationIDInfo = new LabelTextPanel(
-                new JLabel(GetDetailsViewModel.STATIONID_LABEL), stationIDInputField);
+        LabelTextPanel routeIDInfo = new LabelTextPanel(
+                new JLabel(GetDetailsViewModel.ROUTEID_LABEL), routeIDInputField);
 
 
         JPanel buttons = new JPanel();
-        getDetails = new JButton(GetDetailsViewModel.NEXT_DEPARTURE_BUTTON_LABEL);
+        getDetails = new JButton(GetDetailsViewModel.GET_DETAILS_BUTTON_LABEL);
         buttons.add(getDetails);
         cancel = new JButton(GetDetailsViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
+        departuretime = new JButton(GetDetailsViewModel.GET_DETAILS_BUTTON_LABEL);
+        buttons.add(departuretime);
 
         getDetails.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(getDetails)) {
-                            NextDepartureState currentState = getDetailsViewModel.getState();
+                            GetDetailsState currentState = getDetailsViewModel.getState();
 
                             getDetailsController.execute(
-                                    currentState.getStationID(), currentState.getTime()
+                                    currentState.getRouteID(), currentState.isWithDepartures()
                             );
                         }
                     }
@@ -66,14 +70,14 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
         // makes it listen to keystrokes in the usernameInputField.
         //
         // Notice how it has access to instance variables in the enclosing class!
-        stationIDInputField.addKeyListener(
+        routeIDInputField.addKeyListener(
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        NextDepartureState currentState = getDetailsViewModel.getState();
-                        String text = stationIDInputField.getText() + e.getKeyChar();
-                        currentState.setStationID(text);
-                        getDeTailsViewModel.setState(currentState);
+                        GetDetailsState currentState = getDetailsViewModel.getState();
+                        String text = routeIDInputField.getText() + e.getKeyChar();
+                        currentState.setRouteID(text);
+                        getDetailsViewModel.setState(currentState);
                     }
 
                     @Override
@@ -85,15 +89,39 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
                     }
                 });
 
+        departuretime.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(departuretime)) {
+                            GetDetailsState currentState = getDetailsViewModel.getState();
+                            if (withDepartureTime){withDepartureTime = false;}
+                            else{withDepartureTime = true;}
+                            currentState.setWithDepartures(withDepartureTime);
+                        }
+
+                    }
+                }
+
+        );
     }
 
     public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
+        if (evt.getSource().equals(cancel)) {
+            JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");}
+        else if (evt.getSource().equals(departuretime)){
+            if (withDepartureTime) {
+                JOptionPane.showMessageDialog(this, "With Departure Time");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Without Departure Time");
+            }
+        }
     }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Objects.equals(evt.getPropertyName(), "state")) {
-            NextDepartureState state = (NextDepartureState) evt.getNewValue();
+            GetDetailsState state = (GetDetailsState) evt.getNewValue();
 
 
         }
