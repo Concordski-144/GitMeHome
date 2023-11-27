@@ -1,16 +1,9 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.next_departures.NextDepartureController;
-import interface_adapter.next_departures.NextDeparturePresenter;
-import interface_adapter.next_departures.NextDepartureViewModel;
 import interface_adapter.plan_a_trip.PlanATripController;
 import interface_adapter.plan_a_trip.PlanATripPresenter;
 import interface_adapter.plan_a_trip.PlanATripViewModel;
-import use_case.next_departures.NextDepartureDataAccessInterface;
-import use_case.next_departures.NextDepartureInputBoundary;
-import use_case.next_departures.NextDepartureInteractor;
-import use_case.next_departures.NextDepartureOutputBoundary;
 import use_case.plan_a_trip.PlanATripDataAccessInterface;
 import use_case.plan_a_trip.PlanATripInputBoundary;
 import use_case.plan_a_trip.PlanATripInteractor;
