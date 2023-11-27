@@ -1,7 +1,5 @@
 package view;
 
-import interface_adapter.next_departures.NextDepartureState;
-import interface_adapter.next_departures.NextDepartureViewModel;
 import interface_adapter.plan_a_trip.PlanATripController;
 import interface_adapter.plan_a_trip.PlanATripState;
 import interface_adapter.plan_a_trip.PlanATripViewModel;
@@ -14,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class PlanATripView  extends JPanel implements ActionListener, PropertyChangeListener {
@@ -44,9 +41,9 @@ public class PlanATripView  extends JPanel implements ActionListener, PropertyCh
 
 
         JPanel buttons = new JPanel();
-        planATrip = new JButton(NextDepartureViewModel.NEXT_DEPARTURE_BUTTON_LABEL);
+        planATrip = new JButton(PlanATripViewModel.PLAN_A_TRIP_BUTTON_LABEL);
         buttons.add(planATrip);
-        cancel = new JButton(NextDepartureViewModel.CANCEL_BUTTON_LABEL);
+        cancel = new JButton(PlanATripViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
         planATrip.addActionListener(
