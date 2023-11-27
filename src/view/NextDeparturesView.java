@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class NextDeparturesView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -53,7 +54,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                             NextDeparturesState currentState = nextDeparturesViewModel.getState();
 
                             nextDeparturesController.execute(
-                                    currentState.getStationID(), currentState.getTime()
+                                    currentState.getStationID(), LocalDateTime.now()
                             );
                         }
                     }

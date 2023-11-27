@@ -1,10 +1,10 @@
 package app;
 
-import data_access.NextDepartureDataAccessObject;
+import data_access.NextDeparturesDataAccessObject;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.next_departures.NextDepartureViewModel;
-import use_case.next_departures.NextDepartureDataAccessInterface;
-import view.NextDepartureView;
+import interface_adapter.next_departures.NextDeparturesViewModel;
+import use_case.next_departures.NextDeparturesDataAccessInterface;
+import view.NextDeparturesView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -25,11 +25,11 @@ public class Main {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        NextDepartureViewModel nextDepartureViewModel = new NextDepartureViewModel();
+        NextDeparturesViewModel nextDepartureViewModel = new NextDeparturesViewModel();
 
-        NextDepartureDataAccessInterface nextDepartureDataAccessInterface = new NextDepartureDataAccessObject();
+        NextDeparturesDataAccessInterface nextDepartureDataAccessInterface = new NextDeparturesDataAccessObject();
 
-        NextDepartureView nextDepartureView = NextDeparturesUseCaseFactory.create(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccessInterface);
+        NextDeparturesView nextDepartureView = NextDeparturesUseCaseFactory.create(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(nextDepartureView, nextDepartureView.viewName);
 
         viewManagerModel.setActiveView(nextDepartureView.viewName);

@@ -1,9 +1,5 @@
 package use_case.plan_a_trip;
 
-import use_case.next_departures.NextDepartureDataAccessInterface;
-import use_case.next_departures.NextDepartureOutputBoundary;
-import use_case.next_departures.NextDepartureOutputData;
-
 import java.util.HashMap;
 
 public class PlanATripInteractor implements PlanATripInputBoundary {
