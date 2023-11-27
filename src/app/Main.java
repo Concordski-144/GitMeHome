@@ -41,7 +41,7 @@ public class Main {
         PlanATripView planATripView = PlanATripUseCaseFactory.create(viewManagerModel, planATripViewModel, planATripDataAccessInterface);
         views.add(planATripView, planATripView.viewName);
 
-        viewManagerModel.setActiveView(nextDepartureView.viewName);
+        viewManagerModel.setActiveView(planATripView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

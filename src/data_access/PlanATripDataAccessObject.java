@@ -31,9 +31,8 @@ public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
             System.out.println(response);
             assert response.body() != null;
             JSONObject responseBody = new JSONObject(response.body().string());
-            System.out.println(responseBody.getInt("status_code"));
 
-            if (responseBody.getInt("status_code") == 200) {
+            if (response.code() == 200) {
                 JSONObject planObject = responseBody.getJSONObject("plan");
                 int date = planObject.getInt("date");
                 JSONObject fromObject = planObject.getJSONObject("from");
