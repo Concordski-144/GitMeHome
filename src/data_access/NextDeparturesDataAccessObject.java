@@ -66,6 +66,4 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
             throw new RuntimeException(e);
         }
     }
-
-
 }
