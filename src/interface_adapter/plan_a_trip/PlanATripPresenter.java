@@ -16,14 +16,16 @@ public class PlanATripPresenter  implements PlanATripOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(PlanATripOutputData user) {
-
+    public void prepareSuccessView(PlanATripOutputData response) {
+        PlanATripState planATripState = planATripViewModel.getState();
+        planATripState.setPlanMap(response.getPlanMap());
+        planATripViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
         PlanATripState planATripState = planATripViewModel.getState();
-        planATripState.setStationIDError(error);
+        planATripState.setPlaceError(error);
         planATripViewModel.firePropertyChanged();
     }
 }

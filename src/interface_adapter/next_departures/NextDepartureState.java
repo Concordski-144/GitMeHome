@@ -33,7 +33,7 @@ public class NextDepartureState {
 
     public ArrayList<Integer> getDepartureTime(){return departureTime;}
 
-    public void setStationID(String username) {
+    public void setStationID(String stationID) {
         this.stationID = stationID;
     }
 
