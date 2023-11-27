@@ -20,7 +20,6 @@ public class NextDeparturesInteractor implements NextDeparturesInputBoundary{
         for (Route route : routes) {
             if (route.getid().equals(nextDeparturesInputData.getId())){
                 ArrayList<Integer> departureTimes = route.getDepartureTimes();
-                //are we keeping the hashmap here or will it be an array list?
                 nextDeparturesOutputData = new NextDeparturesOutputData(departureTimes, false);
                 break;
             }
