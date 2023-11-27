@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import use_case.next_departures.NextDeparturesDataAccessInterface;
 import entity.Route;
-import entity.SubwayRoute;
 import entity.SubwayRouteFactory;
 import entity.Station;
 
@@ -55,7 +54,7 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
                         departures.add(scheduleArray.getJSONObject(i).getInt("departure_time"));
                     }
                     Station[] stations = {};
-                    SubwayRoute route = (SubwayRoute) subwayRouteFactory.create(routeName, id, stations);
+                    Route route = subwayRouteFactory.create(routeName, id, stations);
                     route.setDepartureTimes(departures);
                     routes.add(route);
                 }
