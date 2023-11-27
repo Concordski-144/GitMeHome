@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
-    public static final String API_URL = "https://external.transitapp.com/v3/public/stop_departures";
-    public static final String API_TOKEN = "";
+    public static final String API_URL = "https://external.transitapp.com/v3/otp/plan";
+    public static final String API_TOKEN = "e418c1e8920c5d9af536656ada565039ba75d7bf015079628a8dc32db1cc9fc9";
 
     public static String getApiToken() {
         return API_TOKEN;
@@ -31,6 +31,7 @@ public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
             System.out.println(response);
             assert response.body() != null;
             JSONObject responseBody = new JSONObject(response.body().string());
+            System.out.println(responseBody.getInt("status_code"));
 
             if (responseBody.getInt("status_code") == 200) {
                 JSONObject planObject = responseBody.getJSONObject("plan");

@@ -1,10 +1,14 @@
 package app;
 
 import data_access.NextDeparturesDataAccessObject;
+import data_access.PlanATripDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.next_departures.NextDeparturesViewModel;
+import interface_adapter.plan_a_trip.PlanATripViewModel;
 import use_case.next_departures.NextDeparturesDataAccessInterface;
+import use_case.plan_a_trip.PlanATripDataAccessInterface;
 import view.NextDeparturesView;
+import view.PlanATripView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -26,11 +30,16 @@ public class Main {
         new ViewManager(views, cardLayout, viewManagerModel);
 
         NextDeparturesViewModel nextDepartureViewModel = new NextDeparturesViewModel();
+        PlanATripViewModel planATripViewModel = new PlanATripViewModel();
 
         NextDeparturesDataAccessInterface nextDepartureDataAccessInterface = new NextDeparturesDataAccessObject();
+        PlanATripDataAccessInterface planATripDataAccessInterface = new PlanATripDataAccessObject();
 
         NextDeparturesView nextDepartureView = NextDeparturesUseCaseFactory.create(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(nextDepartureView, nextDepartureView.viewName);
+
+        PlanATripView planATripView = PlanATripUseCaseFactory.create(viewManagerModel, planATripViewModel, planATripDataAccessInterface);
+        views.add(planATripView, planATripView.viewName);
 
         viewManagerModel.setActiveView(nextDepartureView.viewName);
         viewManagerModel.firePropertyChanged();

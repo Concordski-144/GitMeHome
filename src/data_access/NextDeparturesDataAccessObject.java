@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/stop_departures";
-    public static String API_KEY = "";
+    public static String API_KEY = "e418c1e8920c5d9af536656ada565039ba75d7bf015079628a8dc32db1cc9fc9";
 
     public void setApiKey(String apiKey) {
         API_KEY = apiKey;
