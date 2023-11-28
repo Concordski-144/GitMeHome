@@ -7,6 +7,7 @@ import interface_adapter.next_departures.NextDeparturesViewModel;
 import interface_adapter.plan_a_trip.PlanATripViewModel;
 import use_case.next_departures.NextDeparturesDataAccessInterface;
 import use_case.plan_a_trip.PlanATripDataAccessInterface;
+import view.MainMenuView;
 import view.NextDeparturesView;
 import view.PlanATripView;
 import view.ViewManager;
@@ -40,7 +41,10 @@ public class Main {
         PlanATripView planATripView = PlanATripUseCaseFactory.create(viewManagerModel, planATripViewModel, planATripDataAccessInterface);
         views.add(planATripView, planATripView.viewName);
 
-        viewManagerModel.setActiveView(planATripView.viewName);
+        MainMenuView mainMenuView = new MainMenuView(viewManagerModel);
+        views.add(mainMenuView, mainMenuView.viewName);
+
+        viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

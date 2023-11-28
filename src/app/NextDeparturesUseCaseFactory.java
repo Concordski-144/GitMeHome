@@ -21,7 +21,7 @@ public class NextDeparturesUseCaseFactory {
 
         try {
             NextDeparturesController nextDepartureController = createNextDepartureUseCase(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccess);
-            return new NextDeparturesView(nextDepartureController, nextDepartureViewModel);
+            return new NextDeparturesView(viewManagerModel, nextDepartureController, nextDepartureViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
