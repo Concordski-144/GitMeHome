@@ -3,6 +3,7 @@ package interface_adapter.next_departures;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class NextDeparturesState {
     private String stationID = "";
@@ -52,9 +53,13 @@ public class NextDeparturesState {
 
     @Override
     public String toString(){
-        return "NextDeparturesState{" +
-                "stationID= " + stationID + '\'' +
-                ", departure time= " + time + '\'' +
-                "}";
+        String output = "Next Departures:" + '\n';
+        for (String route : departureTime.keySet()) {
+            output += " Route: " + route + '\n';
+            for (LocalDateTime time : departureTime.get(route)) {
+                output += "  " + time + '\n';
+            }
+        }
+        return output;
     }
 }

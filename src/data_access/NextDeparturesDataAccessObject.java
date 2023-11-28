@@ -54,7 +54,7 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
                     ArrayList<LocalDateTime> departures = new ArrayList<LocalDateTime>();
                     for (int j = 0; j < scheduleArray.length(); j++) {
                         LocalDateTime localDateTime =
-                                LocalDateTime.ofEpochSecond(scheduleArray.getJSONObject(i).getInt("departure_time"),
+                                LocalDateTime.ofEpochSecond(scheduleArray.getJSONObject(j).getInt("departure_time"),
                                         0, OffsetDateTime.now().getOffset());
                         departures.add(localDateTime);
                     }

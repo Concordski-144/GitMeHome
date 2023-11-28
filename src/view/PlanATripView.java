@@ -59,7 +59,7 @@ public class PlanATripView  extends JPanel implements ActionListener, PropertyCh
                             planATripController.execute(
                                     currentState.getFromPlace(), currentState.getToPlace()
                             );
-                            JOptionPane.showMessageDialog(title, currentState.getPlanMap());
+                            JOptionPane.showMessageDialog(title, currentState.toString());
                         }
                     }
                 }

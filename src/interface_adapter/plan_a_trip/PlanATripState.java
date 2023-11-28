@@ -1,5 +1,7 @@
 package interface_adapter.plan_a_trip;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlanATripState {
@@ -49,5 +51,17 @@ public class PlanATripState {
 
     public void setPlanMap(HashMap<String, Object> planMap){
         this.planMap = planMap;
+    }
+
+    @Override
+    public String toString(){
+        String output = "Planned trip:" + '\n' + "Duration of trip: " + planMap.get("duration") + " seconds \n"
+                + "From: (" + planMap.get("fromLat") + ", " + planMap.get("fromLon") + ") \n"
+                + "To: (" + planMap.get("toLat") + ", " + planMap.get("toLon") + ") \n";
+        for (HashMap leg : (ArrayList <HashMap>) planMap.get("legs")) {
+            output += leg + "\n";
+        }
+
+        return output;
     }
 }
