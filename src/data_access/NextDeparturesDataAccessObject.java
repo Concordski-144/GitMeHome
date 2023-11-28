@@ -27,7 +27,7 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
 
 
     @Override
-    public List<Route> getNextDeparturesByRoute(String id) throws RuntimeException {
+    public List<Route> getNextDeparturesByRoute(String id, int time) throws RuntimeException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
                 .url(String.format("https://external.transitapp.com/v3/public/stop_departures?global_stop_id=%s", id))

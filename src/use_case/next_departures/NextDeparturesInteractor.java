@@ -1,29 +1,31 @@
 package use_case.next_departures;
 
 import entity.Route;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class NextDeparturesInteractor implements NextDeparturesInputBoundary{
-    final NextDeparturesDataAccessInterface nextDeparturesDataAccessObject;
-    final NextDeparturesOutputBoundary nextDeparturesPresenter;
+public class NextDeparturesInteractor implements NextDeparturesInputBoundary {
+    final NextDeparturesDataAccessInterface nextDepartureDataAccessObject;
+    final NextDeparturesOutputBoundary nextDeparturePresenter;
 
-    public NextDeparturesInteractor(NextDeparturesDataAccessInterface nextDeparturesDataAccessObject,
-                                    NextDeparturesOutputBoundary nextDeparturesPresenter) {
-        this.nextDeparturesDataAccessObject = nextDeparturesDataAccessObject;
-        this.nextDeparturesPresenter = nextDeparturesPresenter;
+    public NextDeparturesInteractor(NextDeparturesDataAccessInterface nextDepartureDataAccessObject, NextDeparturesOutputBoundary nextDeparturesPresenter) {
+        this.nextDepartureDataAccessObject = nextDepartureDataAccessObject;
+        this.nextDeparturePresenter = nextDeparturesPresenter;
     }
+
+
     @Override
     public void execute(NextDeparturesInputData nextDeparturesInputData) {
-        List<Route> routes = nextDeparturesDataAccessObject.getNextDeparturesByRoute(nextDeparturesInputData.getId());
-        NextDeparturesOutputData nextDeparturesOutputData = null;
+        List<Route> routes = nextDepartureDataAccessObject.getNextDeparturesByRoute(nextDeparturesInputData.getId(), nextDeparturesInputData.getTime());
+        NextDeparturesOutputData nextDepartureOutputData = null;
+        HashMap<String, ArrayList<Integer>> departureTimes = null;
         for (Route route : routes) {
-            if (route.getid().equals(nextDeparturesInputData.getId())){
-                ArrayList<Integer> departureTimes = route.getDepartureTimes();
-                nextDeparturesOutputData = new NextDeparturesOutputData(departureTimes, false);
-                break;
-            }
+            ArrayList<Integer> routeDepartureTimes = route.getDepartureTimes();
+            departureTimes.put(route.getid(), routeDepartureTimes);
         }
-        nextDeparturesPresenter.prepareSuccessView(nextDeparturesOutputData);
+        nextDepartureOutputData = new NextDeparturesOutputData(departureTimes, false);
+        nextDeparturePresenter.prepareSuccessView(nextDepartureOutputData);
     }
 }
