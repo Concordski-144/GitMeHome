@@ -19,7 +19,11 @@ public class PlanATripPresenter  implements PlanATripOutputBoundary {
     public void prepareSuccessView(PlanATripOutputData response) {
         PlanATripState planATripState = planATripViewModel.getState();
         planATripState.setPlanMap(response.getPlanMap());
+        this.planATripViewModel.setState(planATripState);
         planATripViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setActiveView(planATripViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

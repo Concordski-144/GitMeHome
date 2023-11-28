@@ -31,6 +31,10 @@ public class PlanATripState {
         return placeError;
     }
 
+    public HashMap<String, Object> getPlanMap() {
+        return planMap;
+    }
+
     public void setFromPlace(String from) {
         this.fromPlace = from;
     }

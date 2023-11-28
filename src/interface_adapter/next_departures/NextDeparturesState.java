@@ -1,12 +1,14 @@
 package interface_adapter.next_departures;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NextDeparturesState {
     private String stationID = "";
     private Integer time = null;
     private String stationIDError = "";
-    private ArrayList<Integer> departureTime;
+    private HashMap<String, ArrayList<LocalDateTime>> departureTime;
 
     public NextDeparturesState (NextDeparturesState copy) {
         stationID = copy.stationID;
@@ -24,7 +26,7 @@ public class NextDeparturesState {
         this.time = time;
     }
 
-    public void setDepartureTime(ArrayList<Integer> departureTime) {
+    public void setDepartureTime(HashMap<String, ArrayList<LocalDateTime>> departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -32,7 +34,7 @@ public class NextDeparturesState {
         this.stationIDError = stationIDError;
     }
 
-    public ArrayList<Integer> getDepartureTime() {
+    public HashMap<String, ArrayList<LocalDateTime>> getDepartureTime() {
         return departureTime;
     }
 

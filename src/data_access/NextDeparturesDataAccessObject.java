@@ -10,12 +10,14 @@ import entity.SubwayRouteFactory;
 import entity.Station;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/stop_departures";
-    public static String API_KEY = "";
+    public static String API_KEY = "e418c1e8920c5d9af536656ada565039ba75d7bf015079628a8dc32db1cc9fc9";
 
     public void setApiKey(String apiKey) {
         API_KEY = apiKey;
@@ -49,9 +51,12 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
                             + routeObject.getString("route_long_name");
                     JSONArray scheduleArray = routeObject.getJSONArray("itineraries")
                             .getJSONObject(0).getJSONArray("schedule_items");
-                    ArrayList<Integer> departures = new ArrayList<Integer>();
+                    ArrayList<LocalDateTime> departures = new ArrayList<LocalDateTime>();
                     for (int j = 0; j < scheduleArray.length(); j++) {
-                        departures.add(scheduleArray.getJSONObject(i).getInt("departure_time"));
+                        LocalDateTime localDateTime =
+                                LocalDateTime.ofEpochSecond(scheduleArray.getJSONObject(i).getInt("departure_time"),
+                                        0, OffsetDateTime.now().getOffset());
+                        departures.add(localDateTime);
                     }
                     Station[] stations = {};
                     Route route = subwayRouteFactory.create(routeName, id, stations);

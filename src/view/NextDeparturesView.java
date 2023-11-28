@@ -56,6 +56,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                             nextDeparturesController.execute(
                                     currentState.getStationID(), LocalDateTime.now()
                             );
+                            JOptionPane.showMessageDialog(title, currentState.getDepartureTime().values());
                         }
                     }
                 }
