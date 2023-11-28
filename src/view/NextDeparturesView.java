@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class NextDeparturesView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -53,7 +54,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                             NextDeparturesState currentState = nextDeparturesViewModel.getState();
 
                             nextDeparturesController.execute(
-                                    currentState.getStationID(), currentState.getTime()
+                                    currentState.getStationID(), LocalDateTime.now()
                             );
                         }
                     }
@@ -92,7 +93,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                     public void keyTyped(KeyEvent e) {
                         NextDeparturesState currentState = nextDeparturesViewModel.getState();
                         //why don't we just set time as an Integer?
-                        currentState.setTime(timeInputField.getText() + e.getKeyChar());
+                        currentState.setTime(Integer.valueOf(timeInputField.getText() + e.getKeyChar()));
                         nextDeparturesViewModel.setState(currentState);
                     }
 
