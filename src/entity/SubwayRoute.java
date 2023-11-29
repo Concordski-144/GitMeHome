@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class SubwayRoute implements Route {
@@ -8,7 +9,7 @@ public class SubwayRoute implements Route {
     private final String id;
     private final String type = "subway";
     private final Station[] stations;
-    private ArrayList<Integer> departureTimes;
+    private ArrayList<LocalDateTime> departureTimes;
     private ArrayList<Delay> delays = new ArrayList<>();
 
     SubwayRoute(String name, String id, Station[] stations) {
@@ -43,12 +44,12 @@ public class SubwayRoute implements Route {
     }
 
     @Override
-    public ArrayList<Integer> getDepartureTimes() {
+    public ArrayList<LocalDateTime> getDepartureTimes() {
         return departureTimes;
     }
 
     @Override
-    public void setDepartureTimes(ArrayList<Integer> departureTimes) {
+    public void setDepartureTimes(ArrayList<LocalDateTime> departureTimes) {
         this.departureTimes = departureTimes;
     }
 

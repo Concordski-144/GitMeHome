@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.next_departures.NextDeparturesController;
 import interface_adapter.next_departures.NextDeparturesState;
 import interface_adapter.next_departures.NextDeparturesViewModel;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class NextDeparturesView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "next departure";
 
+    private final ViewManagerModel viewManagerModel;
     private final NextDeparturesViewModel nextDeparturesViewModel;
     private final JTextField stationIDInputField = new JTextField(15);
     private final JTextField timeInputField = new JTextField(15);
@@ -27,8 +29,8 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
     private final JButton nextDeparture;
     private final JButton cancel;
 
-    public NextDeparturesView(NextDeparturesController controller, NextDeparturesViewModel viewModel) {
-
+    public NextDeparturesView(ViewManagerModel viewManagerModel, NextDeparturesController controller, NextDeparturesViewModel viewModel) {
+        this.viewManagerModel = viewManagerModel;
         this.nextDeparturesController = controller;
         this.nextDeparturesViewModel = viewModel;
         nextDeparturesViewModel.addPropertyChangeListener(this);
@@ -56,13 +58,24 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                             nextDeparturesController.execute(
                                     currentState.getStationID(), LocalDateTime.now()
                             );
+                            JOptionPane.showMessageDialog(title, currentState.toString());
                         }
                     }
                 }
         );
 
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+                            viewManagerModel.setActiveView("main menu");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
         // This makes a new KeyListener implementing class, instantiates it, and
         // makes it listen to keystrokes in the usernameInputField.

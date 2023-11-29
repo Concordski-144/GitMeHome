@@ -10,6 +10,8 @@ import entity.SubwayRouteFactory;
 import entity.Station;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +51,12 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
                             + routeObject.getString("route_long_name");
                     JSONArray scheduleArray = routeObject.getJSONArray("itineraries")
                             .getJSONObject(0).getJSONArray("schedule_items");
-                    ArrayList<Integer> departures = new ArrayList<Integer>();
+                    ArrayList<LocalDateTime> departures = new ArrayList<LocalDateTime>();
                     for (int j = 0; j < scheduleArray.length(); j++) {
-                        departures.add(scheduleArray.getJSONObject(i).getInt("departure_time"));
+                        LocalDateTime localDateTime =
+                                LocalDateTime.ofEpochSecond(scheduleArray.getJSONObject(j).getInt("departure_time"),
+                                        0, OffsetDateTime.now().getOffset());
+                        departures.add(localDateTime);
                     }
                     Station[] stations = {};
                     Route route = subwayRouteFactory.create(routeName, id, stations);
