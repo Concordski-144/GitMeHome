@@ -6,22 +6,30 @@ import use_case.closest_stops.ClosestStopsOutputData;
 
 public class ClosestStopsPresenter implements ClosestStopsOutputBoundary {
 
-    private final ClosestStopsViewModel loginViewModel;
+    private final ClosestStopsViewModel closestStopsViewModel;
     private ViewManagerModel viewManagerModel;
 
     public ClosestStopsPresenter(ClosestStopsViewModel loginViewModel, ViewManagerModel viewManagerModel) {
-        this.loginViewModel = loginViewModel;
+        this.closestStopsViewModel = loginViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareSuccessView(ClosestStopsOutputData response) {
-        // On success pop out info panel
-        // TODO: 2023-11-26 implement this
+        ClosestStopsState closestStopsState = closestStopsViewModel.getState();
+        closestStopsState.setClosestStops(response.getStops());
+        // On success switch to ClosestStopsView
+        viewManagerModel.setActiveView(closestStopsViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        // TODO: 2023-11-26 implement this
+        ClosestStopsState closestStopsState = closestStopsViewModel.getState();
+        closestStopsState.setClosestStopsError(error);
+        closestStopsViewModel.firePropertyChanged();
+        // On failure show error instead of info
+        viewManagerModel.setActiveView(closestStopsViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }

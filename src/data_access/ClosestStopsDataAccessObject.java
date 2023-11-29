@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ClosestStopsDataAccessObject implements ClosestStopsDataAccessInter
     public List<Station> getClosestStops(double lon, double lat, int num) throws RuntimeException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
-                .url(String.format("https://external.transitapp.com/v3/public/nearby_stops?lat=%s&lon=%s", lat, lon))
+                .url(String.format(API_URL + "?lat=%s&lon=%s", lon, lat))
                 .addHeader("apiKey", API_KEY)
                 .build();
         try {
@@ -43,9 +42,6 @@ public class ClosestStopsDataAccessObject implements ClosestStopsDataAccessInter
 
             if (response.code() == 200) {
                 JSONArray allStops = responseBody.getJSONArray("stops");
-                if (allStops.isEmpty()) {
-                    throw new RuntimeException("No stops found");
-                } 
                 // need to sort allStops by distance from user
                 ArrayList<JSONObject> allStopsList = new ArrayList<>();
                 for (int i = 0; i < allStops.length(); i++) {
@@ -69,9 +65,10 @@ public class ClosestStopsDataAccessObject implements ClosestStopsDataAccessInter
                     double longitude = stop.getDouble("stop_lon");
                     double latitude = stop.getDouble("stop_lat");
                     boolean accessibility = (stop.getInt("wheelchair_boarding") != 0);
-                    Integer[] transitModes = {};
+                    int transitMode = stop.getInt("route_type");
+                    int distance_from_user = stop.getInt("distance");
                     Route[] routes = {};
-                    closestStops.add(stationFactory.create(name, id, longitude, latitude, accessibility, transitModes, routes));
+                    closestStops.add(stationFactory.create(name, id, longitude, latitude, accessibility, transitMode, distance_from_user, routes));
                 }
                 return closestStops;
             } else {
