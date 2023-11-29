@@ -1,5 +1,35 @@
 package interface_adapter.closest_stops;
 
-public class ClosestStopsViewModel {
-    // TODO: 2023-11-26 implement this
+import interface_adapter.ViewModel;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+public class ClosestStopsViewModel extends ViewModel {
+
+    private ClosestStopsState state = new ClosestStopsState();
+
+    public ClosestStopsViewModel() {
+        super("closestStops");
+    }
+
+    public void setState(ClosestStopsState state) {
+        this.state = state;
+    }
+
+    public ClosestStopsState getState() {
+        return state;
+    }
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    @Override
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
 }
