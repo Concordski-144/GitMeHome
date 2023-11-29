@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/otp/plan";
-    public static final String API_TOKEN = "e418c1e8920c5d9af536656ada565039ba75d7bf015079628a8dc32db1cc9fc9";
+    public static final String API_TOKEN = "";
 
     public static String getApiToken() {
         return API_TOKEN;
@@ -88,7 +88,7 @@ public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
 
                 return planMap;
             } else {
-                throw new RuntimeException(responseBody.getString("error"));
+                throw new RuntimeException(response.message());
             }
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
