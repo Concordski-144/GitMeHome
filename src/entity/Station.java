@@ -7,7 +7,7 @@ public interface Station {
     String getid();
     double[] getCoordinates();
     boolean getAccessibility();
-    Integer[] getTransitModes();
+    Integer getTransitMode();
     Integer getDistanceFromUser();
     Route[] getLines();
     ArrayList<Delay> getDelays();
