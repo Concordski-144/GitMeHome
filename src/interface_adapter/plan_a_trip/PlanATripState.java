@@ -60,9 +60,9 @@ public class PlanATripState {
                 + "To: " + planMap.get("toName") + "(" + planMap.get("toLat") + ", " + planMap.get("toLon") + ") \n \n";
         for (HashMap leg : (ArrayList <HashMap>) planMap.get("legs")) {
             output += " Mode of transportation: " + leg.get("mode") + "\n"
-                + " Duration of sub-trip: " + leg.get("duration") + " seconds \n"
-                + " From: " + leg.get("legsFromName") + " (" + leg.get("legsFromLat") + ", " + leg.get("legsFromLon") + ") \n"
-                + " To: " + leg.get("legsToName") + " (" + leg.get("legsToLat") + ", " + leg.get("legsToLon") + ") \n \n";
+                    + " Duration of sub-trip: " + leg.get("duration") + " seconds \n"
+                    + " From: " + leg.get("legsFromName") + " (" + leg.get("legsFromLat") + ", " + leg.get("legsFromLon") + ") \n"
+                    + " To: " + leg.get("legsToName") + " (" + leg.get("legsToLat") + ", " + leg.get("legsToLon") + ") \n \n";
         }
 
         return output;
