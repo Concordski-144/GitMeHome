@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class NextDeparturesState {
     private String stationID = "";
-    private Integer time = null;
+    private String time = null;
     private String stationIDError = "";
     private HashMap<String, ArrayList<LocalDateTime>> departureTime;
 
@@ -23,7 +23,7 @@ public class NextDeparturesState {
         this.stationID = stationID;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -39,7 +39,7 @@ public class NextDeparturesState {
         return departureTime;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
