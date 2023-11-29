@@ -59,9 +59,8 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(nextDeparture)) {
                             NextDeparturesState currentState = nextDeparturesViewModel.getState();
-
                             nextDeparturesController.execute(
-                                    currentState.getStationID(), currentState.getTime()
+                                    currentState.getStationID(), currentState.getTime(), timeInputField.getText().isEmpty()
                             );
                             JOptionPane.showMessageDialog(title, currentState.toString());
                         }

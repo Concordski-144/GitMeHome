@@ -14,9 +14,15 @@ public class NextDeparturesController {
         this.nextDeparturesInteractor = nextDeparturesInteractor;
     }
 
-    public void execute(String stationID, String time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        NextDeparturesInputData nextDeparturesInputData = new NextDeparturesInputData(stationID, LocalDateTime.parse(time, formatter));
+    public void execute(String stationID, String time, boolean emptyCheck) {
+        NextDeparturesInputData nextDeparturesInputData;
+        if (!emptyCheck) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            nextDeparturesInputData = new NextDeparturesInputData(stationID, LocalDateTime.parse(time, formatter));
+        }
+        else {
+            nextDeparturesInputData = new NextDeparturesInputData(stationID, LocalDateTime.now());
+        }
         nextDeparturesInteractor.execute(nextDeparturesInputData);
     }
 }
