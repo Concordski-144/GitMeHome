@@ -56,10 +56,13 @@ public class PlanATripState {
     @Override
     public String toString(){
         String output = "Planned trip:" + '\n' + "Duration of trip: " + planMap.get("duration") + " seconds \n"
-                + "From: (" + planMap.get("fromLat") + ", " + planMap.get("fromLon") + ") \n"
-                + "To: (" + planMap.get("toLat") + ", " + planMap.get("toLon") + ") \n";
+                + "From: " + planMap.get("fromName") + "(" + planMap.get("fromLat") + ", " + planMap.get("fromLon") + ") \n"
+                + "To: " + planMap.get("toName") + "(" + planMap.get("toLat") + ", " + planMap.get("toLon") + ") \n \n";
         for (HashMap leg : (ArrayList <HashMap>) planMap.get("legs")) {
-            output += leg + "\n";
+            output += " Mode of transportation: " + leg.get("mode") + "\n"
+                    + " Duration of sub-trip: " + leg.get("duration") + " seconds \n"
+                    + " From: " + leg.get("legsFromName") + " (" + leg.get("legsFromLat") + ", " + leg.get("legsFromLon") + ") \n"
+                    + " To: " + leg.get("legsToName") + " (" + leg.get("legsToLat") + ", " + leg.get("legsToLon") + ") \n \n";
         }
 
         return output;
