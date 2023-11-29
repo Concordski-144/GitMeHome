@@ -18,7 +18,7 @@ public class NextDeparturesPresenter implements NextDeparturesOutputBoundary {
         NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
         nextDeparturesState.setStationID(nextDeparturesState.getStationID());
         nextDeparturesState.setTime(nextDeparturesState.getTime());
-        nextDeparturesState.setDepartureTime(nextDeparturesState.getDepartureTime());
+        nextDeparturesState.setDepartureTime(response.getDeparturesByRoute());
         nextDeparturesViewModel.firePropertyChanged();
     }
 

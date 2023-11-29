@@ -1,11 +1,10 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.next_departures.NextDeparturesController;
-import interface_adapter.next_departures.NextDeparturesState;
-import interface_adapter.next_departures.NextDeparturesViewModel;
+import interface_adapter.plan_a_trip.PlanATripController;
+import interface_adapter.plan_a_trip.PlanATripState;
+import interface_adapter.plan_a_trip.PlanATripViewModel;
 
-import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,49 +13,51 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class NextDeparturesView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "next departure";
+public class PlanATripView  extends JPanel implements ActionListener, PropertyChangeListener {
+    public final String viewName = "plan a trip";
 
     private final ViewManagerModel viewManagerModel;
-    private final NextDeparturesViewModel nextDeparturesViewModel;
-    private final JTextField stationIDInputField = new JTextField(15);
-    private final JTextField timeInputField = new JTextField(15);
-    private final NextDeparturesController nextDeparturesController;
+    private final PlanATripViewModel planATripViewModel;
+    private final JTextField fromPlaceInputField = new JTextField(15);
+    private final JTextField toPlaceInputField = new JTextField(15);
+    private final PlanATripController planATripController;
 
-    private final JButton nextDeparture;
+    private final JButton planATrip;
     private final JButton cancel;
 
-    public NextDeparturesView(ViewManagerModel viewManagerModel, NextDeparturesController controller, NextDeparturesViewModel viewModel) {
+    public PlanATripView(ViewManagerModel viewManagerModel, PlanATripController planATripController, PlanATripViewModel planATripViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.nextDeparturesController = controller;
-        this.nextDeparturesViewModel = viewModel;
-        nextDeparturesViewModel.addPropertyChangeListener(this);
+        this.planATripViewModel = planATripViewModel;
+        this.planATripController = planATripController;
+        this.planATripViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(NextDeparturesViewModel.TITLE_LABEL);
+        JLabel title = new JLabel(PlanATripViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel stationIDInfo = new LabelTextPanel(
-                new JLabel(NextDeparturesViewModel.STATIONID_LABEL), stationIDInputField);
+        LabelTextPanel fromPlaceInfo = new LabelTextPanel(
+                new JLabel(PlanATripViewModel.FROM_PLACE_LABEL), fromPlaceInputField);
+
+        LabelTextPanel toPlaceInfo = new LabelTextPanel(
+                new JLabel(PlanATripViewModel.TO_PLACE_LABEL), toPlaceInputField);
 
 
         JPanel buttons = new JPanel();
-        nextDeparture = new JButton(NextDeparturesViewModel.NEXT_DEPARTURE_BUTTON_LABEL);
-        buttons.add(nextDeparture);
-        cancel = new JButton(NextDeparturesViewModel.CANCEL_BUTTON_LABEL);
+        planATrip = new JButton(PlanATripViewModel.PLAN_A_TRIP_BUTTON_LABEL);
+        buttons.add(planATrip);
+        cancel = new JButton(PlanATripViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
-        nextDeparture.addActionListener(
+        planATrip.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(nextDeparture)) {
-                            NextDeparturesState currentState = nextDeparturesViewModel.getState();
+                        if (evt.getSource().equals(planATrip)) {
+                            PlanATripState currentState = planATripViewModel.getState();
 
-                            nextDeparturesController.execute(
-                                    currentState.getStationID(), LocalDateTime.now()
+                            planATripController.execute(
+                                    currentState.getFromPlace(), currentState.getToPlace()
                             );
                             JOptionPane.showMessageDialog(title, currentState.toString());
                         }
@@ -81,14 +82,14 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
         // makes it listen to keystrokes in the usernameInputField.
         //
         // Notice how it has access to instance variables in the enclosing class!
-        stationIDInputField.addKeyListener(
+        fromPlaceInputField.addKeyListener(
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        NextDeparturesState currentState = nextDeparturesViewModel.getState();
-                        String text = stationIDInputField.getText() + e.getKeyChar();
-                        currentState.setStationID(text);
-                        nextDeparturesViewModel.setState(currentState);
+                        PlanATripState currentState = planATripViewModel.getState();
+                        String text = fromPlaceInputField.getText() + e.getKeyChar();
+                        currentState.setFromPlace(text);
+                        planATripViewModel.setState(currentState);
                     }
 
                     @Override
@@ -100,33 +101,31 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                     }
                 });
 
-        timeInputField.addKeyListener(
+        toPlaceInputField.addKeyListener(
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        NextDeparturesState currentState = nextDeparturesViewModel.getState();
-                        //why don't we just set time as an Integer?
-                        currentState.setTime(Integer.valueOf(timeInputField.getText() + e.getKeyChar()));
-                        nextDeparturesViewModel.setState(currentState);
+                        PlanATripState currentState = planATripViewModel.getState();
+                        String text = toPlaceInputField.getText() + e.getKeyChar();
+                        currentState.setToPlace(text);
+                        planATripViewModel.setState(currentState);
                     }
 
                     @Override
                     public void keyPressed(KeyEvent e) {
-
                     }
 
                     @Override
                     public void keyReleased(KeyEvent e) {
-
                     }
-                }
-        );
+                });
 
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(stationIDInfo);
+        this.add(fromPlaceInfo);
+        this.add(toPlaceInfo);
         this.add(buttons);
     }
 
@@ -137,7 +136,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Objects.equals(evt.getPropertyName(), "state")) {
-            NextDeparturesState state = (NextDeparturesState) evt.getNewValue();
+            PlanATripState state = (PlanATripState) evt.getNewValue();
 
 
         }
