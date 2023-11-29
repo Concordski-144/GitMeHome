@@ -18,7 +18,6 @@ public class ClosestStopsInteractor implements ClosestStopsInputBoundary {
 
     @Override
     public void execute(ClosestStopsInputData closestStopsInputData) {
-        // TODO: 2023-11-26 implement this
         double lon = closestStopsInputData.getCoordinates()[0];
         double lat = closestStopsInputData.getCoordinates()[1];
         int num = closestStopsInputData.getNumberOfStopsDesired();
@@ -32,6 +31,7 @@ public class ClosestStopsInteractor implements ClosestStopsInputBoundary {
                 ArrayList<Object> value = new ArrayList<>();
                 value.add(station.getName());
                 value.add(station.getDistanceFromUser());
+                value.add(station.getTransitMode());
                 value.add(station.getAccessibility());
                 output.put(key, value);
             }

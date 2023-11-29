@@ -10,7 +10,7 @@ public class ClosestStopsViewModel extends ViewModel {
     private ClosestStopsState state = new ClosestStopsState();
 
     public ClosestStopsViewModel() {
-        super("closestStops");
+        super("closest stops");
     }
 
     public void setState(ClosestStopsState state) {
