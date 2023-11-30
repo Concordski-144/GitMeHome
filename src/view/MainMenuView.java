@@ -60,17 +60,17 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-//        closestStops.addActionListener(
-//                // This creates an anonymous subclass of ActionListener and instantiates it.
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        if (evt.getSource().equals(closestStops)) {
-//                            viewManagerModel.setActiveView();
-//                            viewManagerModel.firePropertyChanged();
-//                        }
-//                    }
-//                }
-//        );
+        closestStops.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(closestStops)) {
+                            viewManagerModel.setActiveView("user location");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
         cancel.addActionListener(
                 new ActionListener() {
