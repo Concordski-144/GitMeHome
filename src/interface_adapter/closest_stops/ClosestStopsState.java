@@ -51,15 +51,4 @@ public class ClosestStopsState {
     public void setLat(double lat) {
         this.lat = lat;
     }
-
-    @Override
-    public String toString() {
-        String formatted = "";
-        for (Map.Entry<String, List<Object>> entry : closestStops.entrySet()) {
-            String id = entry.getKey();
-            String value = entry.getValue().toString();
-            formatted = formatted + "id=" + id + "attributes=" + value + "\n";
-        }
-        return "Closest stops state {\n" + formatted + "}";
-    }
 }

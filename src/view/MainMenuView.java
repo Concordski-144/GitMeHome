@@ -65,7 +65,7 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(closestStops)) {
-                            viewManagerModel.setActiveView("closest stops");
+                            viewManagerModel.setActiveView("user location");
                             viewManagerModel.firePropertyChanged();
                         }
                     }
