@@ -15,6 +15,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class NextDeparturesView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -42,6 +43,10 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                 new JLabel(NextDeparturesViewModel.STATIONID_LABEL), stationIDInputField);
 
 
+        LabelTextPanel timeInfo = new LabelTextPanel(
+                new JLabel(NextDeparturesViewModel.TIME_LABEL), timeInputField);
+
+
         JPanel buttons = new JPanel();
         nextDeparture = new JButton(NextDeparturesViewModel.NEXT_DEPARTURE_BUTTON_LABEL);
         buttons.add(nextDeparture);
@@ -54,9 +59,8 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(nextDeparture)) {
                             NextDeparturesState currentState = nextDeparturesViewModel.getState();
-
                             nextDeparturesController.execute(
-                                    currentState.getStationID(), LocalDateTime.now()
+                                    currentState.getStationID(), currentState.getTime(), timeInputField.getText().isEmpty()
                             );
                             JOptionPane.showMessageDialog(title, currentState.toString());
                         }
@@ -105,8 +109,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
                     @Override
                     public void keyTyped(KeyEvent e) {
                         NextDeparturesState currentState = nextDeparturesViewModel.getState();
-                        //why don't we just set time as an Integer?
-                        currentState.setTime(Integer.valueOf(timeInputField.getText() + e.getKeyChar()));
+                        currentState.setTime(timeInputField.getText() + e.getKeyChar());
                         nextDeparturesViewModel.setState(currentState);
                     }
 
@@ -127,6 +130,7 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
 
         this.add(title);
         this.add(stationIDInfo);
+        this.add(timeInfo);
         this.add(buttons);
     }
 
