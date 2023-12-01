@@ -72,7 +72,6 @@ public class LonLatView extends JPanel implements ActionListener, PropertyChange
                 if (e.getSource().equals(findNearbyStopsButton)) {
                     ClosestStopsState currentState = closestStopsViewModel.getState();
                     closestStopsController.execute(currentState.getLon(), currentState.getLat(), 5);
-                    // this should hopefully change to the ClosestStopsView
                 }
             }
         });

@@ -17,7 +17,7 @@ public class NextDeparturesViewModel extends ViewModel {
     private NextDeparturesState state = new NextDeparturesState();
 
     public NextDeparturesViewModel() {
-        super("get departure time");
+        super("next departure");
     }
 
     public void setState(NextDeparturesState state) {
