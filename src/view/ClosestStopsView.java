@@ -99,6 +99,82 @@ public class ClosestStopsView extends JPanel implements ActionListener, Property
             }
         });
 
+        getDeparturesButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton2)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 1);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton3)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 2);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton4)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 3);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton5)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 4);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(panel1);
