@@ -4,6 +4,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.closest_stops.ClosestStopsController;
 import interface_adapter.closest_stops.ClosestStopsState;
 import interface_adapter.closest_stops.ClosestStopsViewModel;
+import interface_adapter.next_departures.NextDeparturesController;
+import interface_adapter.next_departures.NextDeparturesState;
+import interface_adapter.next_departures.NextDeparturesViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +23,8 @@ public class ClosestStopsView extends JPanel implements ActionListener, Property
     private final ViewManagerModel viewManagerModel;
     private final ClosestStopsViewModel closestStopsViewModel;
     private final ClosestStopsController closestStopsController;
+    private final NextDeparturesViewModel nextDeparturesViewModel;
+    private final NextDeparturesController nextDeparturesController;
     private final String invalidStopError = "Invalid stop";
     private JButton backToMenu = new JButton("Back");
     private final JLabel stopLabel1 = new JLabel();
@@ -35,11 +40,16 @@ public class ClosestStopsView extends JPanel implements ActionListener, Property
     private JButton getDeparturesButton5 = new JButton("Get departures");
     private JPanel closestStopsViewPanel;
 
-    public ClosestStopsView(ViewManagerModel viewManagerModel, ClosestStopsController closestStopsController,
-                            ClosestStopsViewModel closestStopsViewModel) {
+    public ClosestStopsView(ViewManagerModel viewManagerModel,
+                            ClosestStopsController closestStopsController,
+                            ClosestStopsViewModel closestStopsViewModel,
+                            NextDeparturesViewModel nextDeparturesViewModel,
+                            NextDeparturesController nextDeparturesController) {
         this.viewManagerModel = viewManagerModel;
         this.closestStopsController = closestStopsController;
         this.closestStopsViewModel = closestStopsViewModel;
+        this.nextDeparturesViewModel = nextDeparturesViewModel;
+        this.nextDeparturesController = nextDeparturesController;
         closestStopsViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Nearest stops to user");
@@ -76,10 +86,88 @@ public class ClosestStopsView extends JPanel implements ActionListener, Property
                 if (e.getSource().equals(getDeparturesButton1)) {
                     ClosestStopsState currentState = closestStopsViewModel.getState();
                     try {  // try to initiate the NextDepartures use case
-                        // HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
-                        // String stopId = findStopId(closestStops, 0);
-                        // idea: get station id; if there is no corresponding station id for the index it is caught
-                        // TODO: 2023-11-29 find out how to implement this without violating clean architecture
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 0);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton2)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 1);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton3)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 2);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton4)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 3);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
+                    } catch (IndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(null, invalidStopError);
+                    }
+                }
+            }
+        });
+
+        getDeparturesButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(getDeparturesButton5)) {
+                    ClosestStopsState currentState = closestStopsViewModel.getState();
+                    try {  // try to initiate the NextDepartures use case
+                        HashMap<String, List<Object>> closestStops = currentState.getClosestStops();
+                        String stopId = findStopId(closestStops, 4);
+                        NextDeparturesState nextDeparturesState = nextDeparturesViewModel.getState();
+                        nextDeparturesState.setStationID(stopId);
+                        nextDeparturesController.execute(stopId, nextDeparturesState.getTime(), true);
+                        JOptionPane.showMessageDialog(title, nextDeparturesState.toString());
                     } catch (IndexOutOfBoundsException exception) {
                         JOptionPane.showMessageDialog(null, invalidStopError);
                     }

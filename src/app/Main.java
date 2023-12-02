@@ -43,7 +43,8 @@ public class Main {
         PlanATripView planATripView = PlanATripUseCaseFactory.create(viewManagerModel, planATripViewModel, planATripDataAccessInterface);
         views.add(planATripView, planATripView.viewName);
 
-        ClosestStopsView closestStopsView = ClosestStopsUseCaseFactory.createClosestStopsView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);
+        ClosestStopsView closestStopsView = ClosestStopsUseCaseFactory.createClosestStopsView(
+                viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(closestStopsView, closestStopsView.viewName);
 
         LonLatView lonLatView = ClosestStopsUseCaseFactory.createLonLatView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);

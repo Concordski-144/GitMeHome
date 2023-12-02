@@ -52,8 +52,7 @@ public class LonLatView extends JPanel implements ActionListener, PropertyChange
             @Override
             public void keyTyped(KeyEvent e) {
                 ClosestStopsState currentState = closestStopsViewModel.getState();
-                String text = lonInputField.getText() + e.getKeyChar();
-                currentState.setLon(text);
+                currentState.setLon(Double.parseDouble(lonInputField.getText() + e.getKeyChar()));
                 closestStopsViewModel.setState(currentState);
             }
         });
@@ -62,8 +61,7 @@ public class LonLatView extends JPanel implements ActionListener, PropertyChange
             @Override
             public void keyTyped(KeyEvent e) {
                 ClosestStopsState currentState = closestStopsViewModel.getState();
-                String text = latInputField.getText() + e.getKeyChar();
-                currentState.setLat(text);
+                currentState.setLat(Double.parseDouble(latInputField.getText() + e.getKeyChar()));
                 closestStopsViewModel.setState(currentState);
             }
         });
@@ -73,8 +71,7 @@ public class LonLatView extends JPanel implements ActionListener, PropertyChange
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(findNearbyStopsButton)) {
                     ClosestStopsState currentState = closestStopsViewModel.getState();
-                    closestStopsController.execute(Double.parseDouble(currentState.getLon()), Double.parseDouble(currentState.getLat()), 5);
-                    // this should hopefully change to the ClosestStopsView
+                    closestStopsController.execute(currentState.getLon(), currentState.getLat(), 5);
                 }
             }
         });

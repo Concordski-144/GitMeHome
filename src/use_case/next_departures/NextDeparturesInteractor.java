@@ -24,7 +24,7 @@ public class NextDeparturesInteractor implements NextDeparturesInputBoundary {
         HashMap<String, ArrayList<LocalDateTime>> departureTimes = new HashMap<>();
         for (Route route : routes) {
             ArrayList<LocalDateTime> routeDepartureTimes = route.getDepartureTimes();
-            departureTimes.put(route.getid(), routeDepartureTimes);
+            departureTimes.put(route.getName(), routeDepartureTimes);
         }
         nextDepartureOutputData = new NextDeparturesOutputData(departureTimes, false);
         nextDeparturePresenter.prepareSuccessView(nextDepartureOutputData);

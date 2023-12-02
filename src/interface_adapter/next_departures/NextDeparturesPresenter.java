@@ -20,6 +20,9 @@ public class NextDeparturesPresenter implements NextDeparturesOutputBoundary {
         nextDeparturesState.setTime(nextDeparturesState.getTime());
         nextDeparturesState.setDepartureTime(response.getDeparturesByRoute());
         nextDeparturesViewModel.firePropertyChanged();
+        // force show nextDeparturesView whenever called in order to work with being called from other views
+        viewManagerModel.setActiveView(nextDeparturesViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
