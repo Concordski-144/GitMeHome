@@ -5,6 +5,7 @@ import use_case.next_departures.NextDeparturesInputData;
 import use_case.next_departures.NextDeparturesOutputData;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NextDeparturesController {
     final NextDeparturesInputBoundary nextDeparturesInteractor;
@@ -13,8 +14,15 @@ public class NextDeparturesController {
         this.nextDeparturesInteractor = nextDeparturesInteractor;
     }
 
-    public void execute(String stationID, LocalDateTime time) {
-        NextDeparturesInputData nextDeparturesInputData = new NextDeparturesInputData(stationID, time);
+    public void execute(String stationID, String time, boolean emptyCheck) {
+        NextDeparturesInputData nextDeparturesInputData;
+        if (!emptyCheck) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            nextDeparturesInputData = new NextDeparturesInputData(stationID, LocalDateTime.parse(time, formatter));
+        }
+        else {
+            nextDeparturesInputData = new NextDeparturesInputData(stationID, LocalDateTime.now());
+        }
         nextDeparturesInteractor.execute(nextDeparturesInputData);
     }
 }

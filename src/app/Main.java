@@ -1,16 +1,16 @@
 package app;
 
+import data_access.ClosestStopsDataAccessObject;
 import data_access.NextDeparturesDataAccessObject;
 import data_access.PlanATripDataAccessObject;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.closest_stops.ClosestStopsViewModel;
 import interface_adapter.next_departures.NextDeparturesViewModel;
 import interface_adapter.plan_a_trip.PlanATripViewModel;
+import use_case.closest_stops.ClosestStopsDataAccessInterface;
 import use_case.next_departures.NextDeparturesDataAccessInterface;
 import use_case.plan_a_trip.PlanATripDataAccessInterface;
-import view.MainMenuView;
-import view.NextDeparturesView;
-import view.PlanATripView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,15 +31,23 @@ public class Main {
 
         NextDeparturesViewModel nextDepartureViewModel = new NextDeparturesViewModel();
         PlanATripViewModel planATripViewModel = new PlanATripViewModel();
+        ClosestStopsViewModel closestStopsViewModel = new ClosestStopsViewModel();
 
         NextDeparturesDataAccessInterface nextDepartureDataAccessInterface = new NextDeparturesDataAccessObject();
         PlanATripDataAccessInterface planATripDataAccessInterface = new PlanATripDataAccessObject();
+        ClosestStopsDataAccessInterface closestStopsDataAccessInterface = new ClosestStopsDataAccessObject();
 
         NextDeparturesView nextDepartureView = NextDeparturesUseCaseFactory.create(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(nextDepartureView, nextDepartureView.viewName);
 
         PlanATripView planATripView = PlanATripUseCaseFactory.create(viewManagerModel, planATripViewModel, planATripDataAccessInterface);
         views.add(planATripView, planATripView.viewName);
+
+        ClosestStopsView closestStopsView = ClosestStopsUseCaseFactory.createClosestStopsView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);
+        views.add(closestStopsView, closestStopsView.viewName);
+
+        LonLatView lonLatView = ClosestStopsUseCaseFactory.createLonLatView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);
+        views.add(lonLatView, lonLatView.viewName);
 
         MainMenuView mainMenuView = new MainMenuView(viewManagerModel);
         views.add(mainMenuView, mainMenuView.viewName);
