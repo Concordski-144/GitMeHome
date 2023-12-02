@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class ClosestStopsState {
     private HashMap<String, List<Object>> closestStops;
-    private double lon;
-    private double lat;
+    private String lon;
+    private String lat;
     private String closestStopsError = null;
 
     public ClosestStopsState(ClosestStopsState copy) {
@@ -36,19 +36,19 @@ public class ClosestStopsState {
         this.closestStopsError = closestStopsError;
     }
 
-    public double getLon() {
+    public String getLon() {
         return lon;
     }
 
-    public void setLon(double lon) {
+    public void setLon(String lon) {
         this.lon = lon;
     }
 
-    public double getLat() {
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 }
