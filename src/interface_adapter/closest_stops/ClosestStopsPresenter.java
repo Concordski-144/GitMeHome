@@ -9,8 +9,8 @@ public class ClosestStopsPresenter implements ClosestStopsOutputBoundary {
     private final ClosestStopsViewModel closestStopsViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public ClosestStopsPresenter(ClosestStopsViewModel loginViewModel, ViewManagerModel viewManagerModel) {
-        this.closestStopsViewModel = loginViewModel;
+    public ClosestStopsPresenter(ClosestStopsViewModel closestStopsViewModel, ViewManagerModel viewManagerModel) {
+        this.closestStopsViewModel = closestStopsViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -18,6 +18,7 @@ public class ClosestStopsPresenter implements ClosestStopsOutputBoundary {
     public void prepareSuccessView(ClosestStopsOutputData response) {
         ClosestStopsState closestStopsState = closestStopsViewModel.getState();
         closestStopsState.setClosestStops(response.getStops());
+        closestStopsViewModel.firePropertyChanged();
         // On success switch to ClosestStopsView
         viewManagerModel.setActiveView(closestStopsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

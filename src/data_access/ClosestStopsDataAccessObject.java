@@ -31,7 +31,7 @@ public class ClosestStopsDataAccessObject implements ClosestStopsDataAccessInter
     public List<Station> getClosestStops(double lon, double lat, int num) throws RuntimeException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
-                .url(String.format(API_URL + "?lat=%s&lon=%s", lon, lat))
+                .url(String.format(API_URL + "?lat=%s&lon=%s", lat, lon))
                 .addHeader("apiKey", API_KEY)
                 .build();
         try {

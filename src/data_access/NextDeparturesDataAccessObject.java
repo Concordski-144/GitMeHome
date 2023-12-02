@@ -32,7 +32,7 @@ public class NextDeparturesDataAccessObject implements NextDeparturesDataAccessI
     public List<Route> getNextDeparturesByRoute(String id, int time) throws RuntimeException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
-                .url(String.format("https://external.transitapp.com/v3/public/stop_departures?global_stop_id=%s", id))
+                .url(String.format("https://external.transitapp.com/v3/public/stop_departures?global_stop_id=%s&time=%s", id, time))
                 .addHeader("apiKey", API_KEY)
                 .build();
         try {
