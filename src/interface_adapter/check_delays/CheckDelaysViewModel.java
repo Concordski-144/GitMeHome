@@ -8,10 +8,9 @@ import java.beans.PropertyChangeSupport;
 
 public class CheckDelaysViewModel extends ViewModel {
 
-    public static final String NEXT_DEPARTURE_BUTTON_LABEL = "Check Delays";
+    public static final String CHECK_DELAYS_BUTTON_LABEL = "Check Delays";
     public static final String TITLE_LABEL = "Check Delay View";
     public static final String STATIONID_LABEL = "Choose StationID";
-    public static final String TIME = "Choose time";
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
@@ -27,8 +26,7 @@ public class CheckDelaysViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    // This is what the Presenter will call to let the ViewModel know
-    // to alert the View
+    // This is what the Presenter will call to let the ViewModel know to alert the View
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }

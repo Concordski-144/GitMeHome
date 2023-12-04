@@ -24,7 +24,6 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
     private final ViewManagerModel viewManagerModel;
     private final CheckDelaysViewModel checkDelaysViewModel;
     private final JTextField stationIDInputField = new JTextField(15);
-    private final JTextField timeInputField = new JTextField(15);
     private final CheckDelaysController checkDelaysController;
 
     private final JButton nextDeparture;
@@ -43,12 +42,8 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                 new JLabel(CheckDelaysViewModel.STATIONID_LABEL), stationIDInputField);
 
 
-        LabelTextPanel timeInfo = new LabelTextPanel(
-                new JLabel(CheckDelaysViewModel.TIME), timeInputField);
-
-
         JPanel buttons = new JPanel();
-        nextDeparture = new JButton(CheckDelaysViewModel.NEXT_DEPARTURE_BUTTON_LABEL);
+        nextDeparture = new JButton(CheckDelaysViewModel.CHECK_DELAYS_BUTTON_LABEL);
         buttons.add(nextDeparture);
         cancel = new JButton(CheckDelaysViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
@@ -104,32 +99,11 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                     }
                 });
 
-        timeInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        CheckDelaysState currentState = checkDelaysViewModel.getState();
-                        checkDelaysViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(stationIDInfo);
-        this.add(timeInfo);
         this.add(buttons);
     }
 
