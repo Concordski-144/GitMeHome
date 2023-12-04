@@ -36,8 +36,8 @@ public class CheckDelaysState {
         return departureTime;
     }
 
-    public Integer getTime() {
-        return time;
+    public String getType() {
+        return "";
     }
 
     public String getStationID() {
