@@ -57,7 +57,7 @@ public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterfa
                         departures.add(scheduleArray.getJSONObject(i).getInt("departure_time"));
                     }
                     Station[] stations = {};
-                    Delay delay = delayFactory.create();
+                    Delay delay = delayFactory.create("Common Delay", id, "Common Delay", "Delayed", 0, 0, new ArrayList<Route>());
                     delays.add(delay);
                 }
                 return delays;
@@ -67,5 +67,10 @@ public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterfa
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean checkDelaysByStation(String id) {
+        return false;
     }
 }
