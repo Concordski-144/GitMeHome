@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CheckDelaysOutputData {
-    private final HashMap<String, ArrayList<Integer>> delaysByRoute;
+    private final HashMap<String, String> delaysByRoute;
     private boolean useCaseFailed;
 
-    public CheckDelaysOutputData(HashMap<String,  ArrayList<Integer>> delaysByRoute, boolean useCaseFailed) {
+    public CheckDelaysOutputData(HashMap<String,  String> delaysByRoute, boolean useCaseFailed) {
         this.delaysByRoute = delaysByRoute;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public HashMap<String,  ArrayList<Integer>> getDelaysByRoute() {
+    public HashMap<String,  String> getDelaysByRoute() {
         return delaysByRoute;
     }
 }
