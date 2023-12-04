@@ -50,9 +50,10 @@ public class CheckDelaysState {
 
     @Override
     public String toString(){
-        return "CheckDelaysState{" +
-                "stationID= " + stationID + '\'' +
-                ", departure time= " + queryType + '\'' +
-                "}";
+        if (delayed) {
+            return "Lines at " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
+        } else {
+            return "There is no delay at " + stationID.substring(0, stationID.length() - 1) + ".";
+        }
     }
 }
