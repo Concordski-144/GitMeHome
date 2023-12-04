@@ -2,6 +2,8 @@ package view;
 
 import app.Main;
 import entity.Route;
+import entity.Station;
+import entity.SubwayRouteFactory;
 import use_case.next_departures.*;
 import use_case.plan_a_trip.*;
 
@@ -10,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -25,6 +28,11 @@ public class NextDeparturesTest {
 
             @Override
             public java.util.List<Route> getNextDeparturesByRoute(String id, int time) {
+                ArrayList<Route> routes = new ArrayList<Route>();
+                SubwayRouteFactory subwayRouteFactory = new SubwayRouteFactory();
+                Station[] stations = {};
+                Route route = subwayRouteFactory.create("13 Avenue Road", id, stations);
+
                 return null;
             }
         };
@@ -41,7 +49,7 @@ public class NextDeparturesTest {
             }
         };
 
-        NextDeparturesInputData inputData = new NextDeparturesInputData("TTC:138961", LocalDateTime.now());
+        NextDeparturesInputData inputData = new NextDeparturesInputData("TTC:138961", 1701711649);
         NextDeparturesInputBoundary interactor = new NextDeparturesInteractor(
                 userRepository, successPresenter);
         interactor.execute(inputData);
@@ -67,7 +75,7 @@ public class NextDeparturesTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        PlanATripView sv = (PlanATripView) jp2.getComponent(1);
+        NextDeparturesView sv = (NextDeparturesView) jp2.getComponent(0);
 
         JPanel buttons = (JPanel) sv.getComponent(3);
 
