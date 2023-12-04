@@ -109,7 +109,6 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void keyTyped(KeyEvent e) {
                         CheckDelaysState currentState = checkDelaysViewModel.getState();
-                        currentState.setTime(Integer.valueOf(timeInputField.getText() + e.getKeyChar()));
                         checkDelaysViewModel.setState(currentState);
                     }
 

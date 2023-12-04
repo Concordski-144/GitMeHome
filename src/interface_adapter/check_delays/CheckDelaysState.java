@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class CheckDelaysState {
     private String stationID = "";
-    private Integer time = null;
+    private String queryType = "";
     private String stationIDError = "";
-    private ArrayList<Integer> departureTime;
+    private boolean delayed;
 
     public CheckDelaysState(CheckDelaysState copy) {
         stationID = copy.stationID;
-        time = copy.time;
+        queryType = copy.queryType;
         stationIDError = copy.stationIDError;
-        departureTime = copy.departureTime;
+        delayed = copy.delayed;
     }
     public CheckDelaysState(){}
 
@@ -20,24 +20,24 @@ public class CheckDelaysState {
         this.stationID = stationID;
     }
 
-    public void setTime(Integer time) {
-        this.time = time;
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 
-    public void setDepartureTime(ArrayList<Integer> departureTime) {
-        this.departureTime = departureTime;
+    public void setDelayStatus(boolean delayed) {
+        this.delayed = delayed;
     }
 
     public void setStationIDError(String stationIDError) {
         this.stationIDError = stationIDError;
     }
 
-    public ArrayList<Integer> getDepartureTime() {
-        return departureTime;
+    public boolean getDelayStatus() {
+        return delayed;
     }
 
     public String getType() {
-        return "";
+        return this.queryType;
     }
 
     public String getStationID() {
@@ -52,7 +52,7 @@ public class CheckDelaysState {
     public String toString(){
         return "CheckDelaysState{" +
                 "stationID= " + stationID + '\'' +
-                ", departure time= " + time + '\'' +
+                ", departure time= " + queryType + '\'' +
                 "}";
     }
 }
