@@ -8,8 +8,8 @@ import java.beans.PropertyChangeSupport;
 
 public class CheckDelaysViewModel extends ViewModel {
 
-    public static final String NEXT_DEPARTURE_BUTTON_LABEL = "Next Departure";
-    public static final String TITLE_LABEL = "Next Departure View";
+    public static final String NEXT_DEPARTURE_BUTTON_LABEL = "Check Delays";
+    public static final String TITLE_LABEL = "Check Delay View";
     public static final String STATIONID_LABEL = "Choose StationID";
     public static final String TIME = "Choose time";
 
@@ -18,7 +18,7 @@ public class CheckDelaysViewModel extends ViewModel {
     private CheckDelaysState state = new CheckDelaysState();
 
     public CheckDelaysViewModel() {
-        super("get departure time");
+        super("get delays");
     }
 
     public void setState(CheckDelaysState state) {
