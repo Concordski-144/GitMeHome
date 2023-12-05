@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,16 +32,27 @@ public class NextDeparturesTest {
                 ArrayList<Route> routes = new ArrayList<Route>();
                 SubwayRouteFactory subwayRouteFactory = new SubwayRouteFactory();
                 Station[] stations = {};
+                ArrayList<LocalDateTime> departures = new ArrayList<LocalDateTime>();
+                departures.add(LocalDateTime.ofEpochSecond(1701713160, 0, OffsetDateTime.now().getOffset()));
+                departures.add(LocalDateTime.ofEpochSecond(1701714960, 0, OffsetDateTime.now().getOffset()));
+                departures.add(LocalDateTime.ofEpochSecond(1701716760, 0, OffsetDateTime.now().getOffset()));
                 Route route = subwayRouteFactory.create("13 Avenue Road", id, stations);
+                route.setDepartureTimes(departures);
+                routes.add(route);
 
-                return null;
+                return routes;
             }
         };
 
         NextDeparturesOutputBoundary successPresenter = new NextDeparturesOutputBoundary() {
             @Override
             public void prepareSuccessView(NextDeparturesOutputData user) {
-                assertEquals("", user);
+                assertEquals(LocalDateTime.ofEpochSecond(1701713160, 0, OffsetDateTime.now().getOffset()),
+                        user.getDeparturesByRoute().get("TTC:138961").get(0));
+                assertEquals(LocalDateTime.ofEpochSecond(1701714960, 0, OffsetDateTime.now().getOffset()),
+                        user.getDeparturesByRoute().get("TTC:138961").get(1));
+                assertEquals(LocalDateTime.ofEpochSecond(1701716760, 0, OffsetDateTime.now().getOffset()),
+                        user.getDeparturesByRoute().get("TTC:138961").get(2));
             }
 
             @Override
@@ -49,7 +61,7 @@ public class NextDeparturesTest {
             }
         };
 
-        NextDeparturesInputData inputData = new NextDeparturesInputData("TTC:138961", 1701711649);
+        NextDeparturesInputData inputData = new NextDeparturesInputData("TTC:138961", LocalDateTime.ofEpochSecond(1701711649, 0, OffsetDateTime.now().getOffset()));
         NextDeparturesInputBoundary interactor = new NextDeparturesInteractor(
                 userRepository, successPresenter);
         interactor.execute(inputData);
@@ -83,6 +95,33 @@ public class NextDeparturesTest {
     }
 
 
+    public JButton getMainMenuButton() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app);
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        MainMenuView sv = (MainMenuView) jp2.getComponent(4);
+
+        JPanel buttons = (JPanel) sv.getComponent(1);
+
+        return (JButton) buttons.getComponent(1);
+    }
+
+
     @org.junit.Test
     public void testNextDeparturesButtonPresent() {
         Main.main(null);
@@ -92,13 +131,14 @@ public class NextDeparturesTest {
 
 
     @org.junit.Test
-    public void testClearUsersPopUpShown() {
+    public void testNextDeparturesPopUpShown() {
 
         popUpDiscovered = false;
 
         Main.main(null);
         JFrame app = null;
 
+        JButton mainButton = getMainMenuButton();
         JButton button = getButton();
 
 
@@ -107,6 +147,7 @@ public class NextDeparturesTest {
         createCloseTimer().start();
 
         //click the button
+        mainButton.doClick();
         button.doClick();
 
         // will continue execution here after the JDialog is closed
@@ -138,8 +179,8 @@ public class NextDeparturesTest {
                             System.out.println("message = " + s);
 
                             // store the information we got from the JDialog
-                            PlanATripTest.message = s;
-                            PlanATripTest.popUpDiscovered = true;
+                            NextDeparturesTest.message = s;
+                            NextDeparturesTest.popUpDiscovered = true;
 
                             System.out.println("disposing of..." + window.getClass());
                             window.dispose();

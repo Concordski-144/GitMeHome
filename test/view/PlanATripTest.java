@@ -121,39 +121,6 @@ public class PlanATripTest {
     }
 
 
-    public JTextField getTextPanel(String text) {
-        JFrame app = null;
-        Window[] windows = Window.getWindows();
-        for (Window window : windows) {
-            if (window instanceof JFrame) {
-                app = (JFrame) window;
-            }
-        }
-
-        assertNotNull(app);
-
-        Component root = app.getComponent(0);
-
-        Component cp = ((JRootPane) root).getContentPane();
-
-        JPanel jp = (JPanel) cp;
-
-        JPanel jp2 = (JPanel) jp.getComponent(0);
-
-        PlanATripView sv = (PlanATripView) jp2.getComponent(1);
-
-        if (text.equals("from")) {
-            LabelTextPanel fromLabal = (LabelTextPanel) sv.getComponent(1);
-            return (JTextField) fromLabal.getComponent(1);
-        }
-        else {
-            LabelTextPanel toLabel = (LabelTextPanel) sv.getComponent(2);
-            return (JTextField) toLabel.getComponent(1);
-        }
-
-    }
-
-
     @org.junit.Test
     public void testPlanATripButtonPresent() {
         Main.main(null);
@@ -172,8 +139,6 @@ public class PlanATripTest {
 
         JButton mainButton = getMainMenuButton();
         JButton button = getButton();
-        JTextField from = getTextPanel("from");
-        JTextField to = getTextPanel("to");
 
 
         // since clicking the button should end up displaying a JDialog to the user to report the
@@ -182,8 +147,6 @@ public class PlanATripTest {
 
         //click the button
         mainButton.doClick();
-        from.setText("43.6683, -79.3999");
-        to.setText("43.6453, -79.3806");
         button.doClick();
 
         // will continue execution here after the JDialog is closed
