@@ -1,71 +1,18 @@
 package view;
 
 import app.Main;
-import entity.Route;
-import entity.Station;
-import entity.SubwayRouteFactory;
-import use_case.next_departures.*;
-import use_case.plan_a_trip.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-public class NextDeparturesTest {
+public class PlanATripViewTest {
 
     static String message = "";
     static boolean popUpDiscovered = false;
-
-    @org.junit.Test
-    public void testNextDeparturesInteractor() {
-        NextDeparturesDataAccessInterface userRepository = new NextDeparturesDataAccessInterface() {
-
-            @Override
-            public java.util.List<Route> getNextDeparturesByRoute(String id, int time) {
-                ArrayList<Route> routes = new ArrayList<Route>();
-                SubwayRouteFactory subwayRouteFactory = new SubwayRouteFactory();
-                Station[] stations = {};
-                ArrayList<LocalDateTime> departures = new ArrayList<LocalDateTime>();
-                departures.add(LocalDateTime.ofEpochSecond(1701713160, 0, OffsetDateTime.now().getOffset()));
-                departures.add(LocalDateTime.ofEpochSecond(1701714960, 0, OffsetDateTime.now().getOffset()));
-                departures.add(LocalDateTime.ofEpochSecond(1701716760, 0, OffsetDateTime.now().getOffset()));
-                Route route = subwayRouteFactory.create("13 Avenue Road", id, stations);
-                route.setDepartureTimes(departures);
-                routes.add(route);
-
-                return routes;
-            }
-        };
-
-        NextDeparturesOutputBoundary successPresenter = new NextDeparturesOutputBoundary() {
-            @Override
-            public void prepareSuccessView(NextDeparturesOutputData user) {
-                assertEquals(LocalDateTime.ofEpochSecond(1701713160, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(0));
-                assertEquals(LocalDateTime.ofEpochSecond(1701714960, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(1));
-                assertEquals(LocalDateTime.ofEpochSecond(1701716760, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(2));
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected.");
-            }
-        };
-
-        NextDeparturesInputData inputData = new NextDeparturesInputData("TTC:138961", LocalDateTime.ofEpochSecond(1701711649, 0, OffsetDateTime.now().getOffset()));
-        NextDeparturesInputBoundary interactor = new NextDeparturesInteractor(
-                userRepository, successPresenter);
-        interactor.execute(inputData);
-    }
 
 
     public JButton getButton() {
@@ -87,7 +34,7 @@ public class NextDeparturesTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        NextDeparturesView sv = (NextDeparturesView) jp2.getComponent(0);
+        PlanATripView sv = (PlanATripView) jp2.getComponent(1);
 
         JPanel buttons = (JPanel) sv.getComponent(3);
 
@@ -123,15 +70,15 @@ public class NextDeparturesTest {
 
 
     @org.junit.Test
-    public void testNextDeparturesButtonPresent() {
+    public void testPlanATripButtonPresent() {
         Main.main(null);
         JButton button = getButton();
-        assert(button.getText().equals("Next Departure"));
+        assert(button.getText().equals("Plan your trip"));
     }
 
 
     @org.junit.Test
-    public void testNextDeparturesPopUpShown() {
+    public void testPlanATripPopUpShown() {
 
         popUpDiscovered = false;
 
@@ -179,8 +126,8 @@ public class NextDeparturesTest {
                             System.out.println("message = " + s);
 
                             // store the information we got from the JDialog
-                            NextDeparturesTest.message = s;
-                            NextDeparturesTest.popUpDiscovered = true;
+                            PlanATripViewTest.message = s;
+                            PlanATripViewTest.popUpDiscovered = true;
 
                             System.out.println("disposing of..." + window.getClass());
                             window.dispose();
