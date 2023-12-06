@@ -14,6 +14,13 @@ public class GetDetailsState {
         details = copy.details;
     }
     public GetDetailsState(){}
+    public String DetailsToString(){
+        String stringDetails = "";
+        for (String s: details){
+            stringDetails += s;
+        }
+        return stringDetails;
+    }
 
     public ArrayList<String>GetDetails(){return details;}
 

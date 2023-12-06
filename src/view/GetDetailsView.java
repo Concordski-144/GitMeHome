@@ -124,7 +124,13 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
     public void propertyChange(PropertyChangeEvent evt) {
         if (Objects.equals(evt.getPropertyName(), "state")) {
             GetDetailsState state = (GetDetailsState) evt.getNewValue();
-
+            if (state.getRouteIDError() != null) {
+                JOptionPane.showMessageDialog(this, state.getRouteIDError());
+            }
+            else{
+                GetDetailsState state1 = (GetDetailsState) evt.getNewValue();
+                JOptionPane.showMessageDialog(this, state.DetailsToString());
+            }
 
         }
     }
