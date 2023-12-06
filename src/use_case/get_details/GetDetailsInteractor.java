@@ -17,5 +17,7 @@ public class GetDetailsInteractor implements GetDetailsInputBoundary{
     @Override
     public void execute(GetDetailsInputData getDetailsInputData) {
         ArrayList<String> details = getDetailsDataAccessObject.getDetails(getDetailsInputData.getRouteID(), getDetailsInputData.isWithDepartureTime());
+        GetDetailsOutputData getDetailsOutputData = new GetDetailsOutputData(details, false);
+        getDetailsPresenter.prepareSuccessView(getDetailsOutputData);
     }
 }

@@ -8,13 +8,18 @@ import view.GetDetailsView;
 
 import java.beans.PropertyChangeListener;
 
-public class GetDetailsViewModel {
+public class GetDetailsViewModel extends ViewModel{
     public static final String GET_DETAILS_BUTTON_LABEL = "Get Details";
     public static final String ROUTEID_LABEL = "Choose StationID";
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
     public static final String WITH_DEPARTURE_TIME_BUTTON_LABEL = "Show Departure Time";
     private GetDetailsState state = new GetDetailsState();
+
+    public GetDetailsViewModel(String viewName) {
+        super("get details");
+    }
+
     public void setState(GetDetailsState state) {
         this.state = state;
     }
