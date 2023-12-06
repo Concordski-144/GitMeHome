@@ -138,7 +138,7 @@ public class PlanATripViewTest {
 
         };
 
-        Timer t = new Timer(1000, close);
+        Timer t = new Timer(3000, close);
         t.setRepeats(false);
         return t;
     }

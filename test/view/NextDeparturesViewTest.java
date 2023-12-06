@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import static org.junit.Assert.*;
 
@@ -65,8 +66,36 @@ public class NextDeparturesViewTest {
 
         JPanel buttons = (JPanel) sv.getComponent(1);
 
-        return (JButton) buttons.getComponent(1);
+        return (JButton) buttons.getComponent(0);
     }
+
+
+    public JTextField getIdTextField() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app);
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        NextDeparturesView sv = (NextDeparturesView) jp2.getComponent(0);
+
+        LabelTextPanel textPanel = (LabelTextPanel) sv.getComponent(1);
+
+        return (JTextField) textPanel.getComponent(1);
+    }
+
 
 
     @org.junit.Test
@@ -86,6 +115,7 @@ public class NextDeparturesViewTest {
         JFrame app = null;
 
         JButton mainButton = getMainMenuButton();
+        JTextField id = getIdTextField();
         JButton button = getButton();
 
 
@@ -95,6 +125,9 @@ public class NextDeparturesViewTest {
 
         //click the button
         mainButton.doClick();
+        id.setText("TTC:138961");
+        KeyEvent key = new KeyEvent(id, KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0,  KeyEvent.VK_UNDEFINED);
+        id.getKeyListeners()[0].keyTyped(key);
         button.doClick();
 
         // will continue execution here after the JDialog is closed
@@ -138,7 +171,7 @@ public class NextDeparturesViewTest {
 
         };
 
-        Timer t = new Timer(1000, close);
+        Timer t = new Timer(5000, close);
         t.setRepeats(false);
         return t;
     }

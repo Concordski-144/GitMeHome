@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ClosestStopsDataAccessObject implements ClosestStopsDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/nearby_stops";
-    public String API_KEY = "";
+    public String API_KEY = "e418c1e8920c5d9af536656ada565039ba75d7bf015079628a8dc32db1cc9fc9";
 
     public String getApiKey() {
         return API_KEY;
