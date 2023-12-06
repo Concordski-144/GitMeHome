@@ -16,6 +16,7 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
     private final JButton planATrip;
     private final JButton nextDeparture;
     private final JButton closestStops;
+    private final JButton checkDelays;
     private final JButton cancel;
 
     public MainMenuView(ViewManagerModel viewManagerModel) {
@@ -34,6 +35,8 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
         buttons.add(closestStops);
         cancel = new JButton("Cancel");
         buttons.add(cancel);
+        checkDelays = new JButton("Check for delays");
+        buttons.add(checkDelays);
         buttons.setLayout(new GridLayout(4, 0));
 
         nextDeparture.addActionListener(
@@ -66,6 +69,18 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(closestStops)) {
                             viewManagerModel.setActiveView("user location");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+
+        checkDelays.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(checkDelays)) {
+                            viewManagerModel.setActiveView("check delays");
                             viewManagerModel.firePropertyChanged();
                         }
                     }
