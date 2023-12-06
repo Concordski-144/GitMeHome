@@ -17,8 +17,7 @@ public class CheckDelaysInteractorTest {
                     case "CDTEST:-1":
                         return false;
                     default:
-                        assert false;
-                        return false;
+                        throw new RuntimeException("Error: Invalid route ID");
                 }
             }
 
@@ -30,8 +29,7 @@ public class CheckDelaysInteractorTest {
                     case "CDTEST:-2":
                         return false;
                     default:
-                        assert false;
-                        return false;
+                        throw new RuntimeException("Error: Invalid route ID");
                 }
             }
         };
@@ -66,19 +64,37 @@ public class CheckDelaysInteractorTest {
             }
         };
 
+        CheckDelaysOutputBoundary checkDelaysPresenterError = new CheckDelaysOutputBoundary() {
+            @Override
+            public void prepareSuccessView(CheckDelaysOutputData checkDelaysOutputData) {
+                if (checkDelaysOutputData.getDelayStatus()) {
+                    assert false;
+                } else {
+                    assert false;
+                }
+            }
+            @Override
+            public void prepareFailView(String error) {
+                assert true;
+            }
+        };
+
         CheckDelaysInputData inputDataRouteDelayed = new CheckDelaysInputData("CDTEST:1", "route");
         CheckDelaysInputData inputDataRouteNotDelayed = new CheckDelaysInputData("CDTEST:-1", "route");
+        CheckDelaysInputData inputDataRouteError = new CheckDelaysInputData("CDTEST:0", "route");
         CheckDelaysInputData inputDataStationDelayed = new CheckDelaysInputData("CDTEST:2", "station");
         CheckDelaysInputData inputDataStationNotDelayed = new CheckDelaysInputData("CDTEST:-2", "station");
+        CheckDelaysInputData inputDataStationError = new CheckDelaysInputData("CDTEST:0", "station");
 
-        CheckDelaysInputBoundary interactorRouteDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterDelayed);
-        CheckDelaysInputBoundary interactorRouteNotDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterNotDelayed);
-        CheckDelaysInputBoundary interactorStationDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterDelayed);
-        CheckDelaysInputBoundary interactorStationNotDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterNotDelayed);
+        CheckDelaysInputBoundary interactorDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterDelayed);
+        CheckDelaysInputBoundary interactorNotDelayed = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterNotDelayed);
+        CheckDelaysInputBoundary interactorError = new CheckDelaysInteractor(checkDelaysDAO, checkDelaysPresenterError);
 
-        interactorRouteDelayed.execute(inputDataRouteDelayed);
-        interactorRouteNotDelayed.execute(inputDataRouteNotDelayed);
-        interactorStationDelayed.execute(inputDataStationDelayed);
-        interactorStationNotDelayed.execute(inputDataStationNotDelayed);
+        interactorDelayed.execute(inputDataRouteDelayed);
+        interactorNotDelayed.execute(inputDataRouteNotDelayed);
+        interactorError.execute(inputDataRouteError);
+        interactorDelayed.execute(inputDataStationDelayed);
+        interactorNotDelayed.execute(inputDataStationNotDelayed);
+        interactorError.execute(inputDataStationError);
     }
 }
