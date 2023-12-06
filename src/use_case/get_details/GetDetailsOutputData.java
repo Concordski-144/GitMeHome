@@ -16,4 +16,8 @@ public class GetDetailsOutputData {
         return details;
     }
 
+    public GetDetailsOutputData(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
 }
