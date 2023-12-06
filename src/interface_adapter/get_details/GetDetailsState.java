@@ -17,7 +17,7 @@ public class GetDetailsState {
     public String DetailsToString(){
         String stringDetails = "";
         for (String s: details){
-            stringDetails += s;
+            stringDetails = stringDetails + s + "\n";
         }
         return stringDetails;
     }

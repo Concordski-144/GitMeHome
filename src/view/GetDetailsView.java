@@ -129,7 +129,7 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
             }
             else{
                 GetDetailsState state1 = (GetDetailsState) evt.getNewValue();
-                JOptionPane.showMessageDialog(this, state.DetailsToString());
+                JOptionPane.showMessageDialog(this, state1.DetailsToString());
             }
 
         }
