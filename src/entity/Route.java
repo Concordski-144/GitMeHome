@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface Route {
@@ -8,8 +9,8 @@ public interface Route {
     String getType();
     Station[] getRoute();
     Station getDestination();
-    ArrayList<Integer> getDepartureTimes();
-    void setDepartureTimes(ArrayList<Integer> departureTimes);
+    ArrayList<LocalDateTime> getDepartureTimes();
+    void setDepartureTimes(ArrayList<LocalDateTime> departureTimes);
     ArrayList<Delay> getDelays();
     void setDelays(ArrayList<Delay> delays);
 }

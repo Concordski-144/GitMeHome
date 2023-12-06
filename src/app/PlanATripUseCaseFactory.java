@@ -21,7 +21,7 @@ public class PlanATripUseCaseFactory {
 
         try {
             PlanATripController planATripController = createPlanATripUseCase(viewManagerModel, planATripViewModel, planATripDataAccess);
-            return new PlanATripView(planATripController, planATripViewModel);
+            return new PlanATripView(viewManagerModel, planATripController, planATripViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import use_case.plan_a_trip.PlanATripDataAccessInterface;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
@@ -34,32 +35,63 @@ public class PlanATripDataAccessObject implements PlanATripDataAccessInterface {
 
             if (response.code() == 200) {
                 JSONObject planObject = responseBody.getJSONObject("plan");
-                int date = planObject.getInt("date");
-                JSONObject fromObject = planObject.getJSONObject("from");
-                HashMap<String, Object> fromMap = createPlaceHashMap(fromObject);
-                JSONObject toObject = planObject.getJSONObject("to");
-                HashMap<String, Object> toMap = createPlaceHashMap(toObject);
-                JSONArray itinerariesArray = planObject.getJSONArray("itineraries");
                 HashMap<String, Object> planMap = new HashMap<>();
-                planMap.put("date", date);
-                planMap.put("from", fromMap);
-                planMap.put("to", toMap);
-                planMap.put("itineraries", itinerariesArray);
+
+                double fromLat = planObject.getJSONObject("from").getDouble("lat");
+                planMap.put("fromLat", fromLat);
+                double fromLon = planObject.getJSONObject("from").getDouble("lon");
+                planMap.put("fromLon", fromLon);
+                String fromName = planObject.getJSONObject("from").getString("name");
+                planMap.put("fromName", fromName);
+
+                double toLat = planObject.getJSONObject("to").getDouble("lat");
+                planMap.put("toLat", toLat);
+                double toLon = planObject.getJSONObject("to").getDouble("lon");
+                planMap.put("toLon", toLon);
+                String toName = planObject.getJSONObject("to").getString("name");
+                planMap.put("toName", toName);
+
+                JSONArray itinerariesArray = planObject.getJSONArray("itineraries");
+                if (!itinerariesArray.isNull(0)) {
+                    JSONObject firstItinerary = itinerariesArray.getJSONObject(0);
+                    planMap.put("duration", firstItinerary.getInt("duration"));
+                    planMap.put("transitTime", firstItinerary.getInt("transitTime"));
+                    planMap.put("walkTime", firstItinerary.getInt("walkTime"));
+                    JSONArray legs = firstItinerary.getJSONArray("legs");
+                    ArrayList<HashMap<String, Object>> legsNeeded = new ArrayList<>();
+                    for (int i = 0; i < legs.length(); i++) {
+                        HashMap<String, Object> temp = new HashMap<>();
+                        temp.put("duration", legs.getJSONObject(i).getInt("duration"));
+                        temp.put("mode", legs.getJSONObject(i).getString("mode"));
+
+                        double legsFromLat = legs.getJSONObject(i).getJSONObject("from").getDouble("lat");
+                        temp.put("legsFromLat", legsFromLat);
+                        double legsFromLon = legs.getJSONObject(i).getJSONObject("from").getDouble("lon");
+                        temp.put("legsFromLon", legsFromLon);
+                        String legsFromName = legs.getJSONObject(i).getJSONObject("from").getString("name");
+                        temp.put("legsFromName", legsFromName);
+
+                        double legsToLat = legs.getJSONObject(i).getJSONObject("to").getDouble("lat");
+                        temp.put("legsToLat", legsToLat);
+                        double legsToLon = legs.getJSONObject(i).getJSONObject("to").getDouble("lon");
+                        temp.put("legsToLon", legsToLon);
+                        String legsToName = legs.getJSONObject(i).getJSONObject("to").getString("name");
+                        temp.put("legsToName", legsToName);
+
+                        legsNeeded.add(temp);
+                    }
+                    planMap.put("legs", legsNeeded);
+                }
+                else {
+                    planMap.put("legs", null);
+                }
+
                 return planMap;
             } else {
-                throw new RuntimeException(responseBody.getString("error"));
+                throw new RuntimeException(response.message());
             }
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private HashMap<String, Object> createPlaceHashMap(JSONObject fromObject) {
-        HashMap<String, Object> place = new HashMap<>();
-        place.put("lat", fromObject.getDouble("lat"));
-        place.put("lon", fromObject.getDouble("lon"));
-        place.put("name", fromObject.getString("name"));
-        place.put("type", fromObject.getString("vertexType"));
-        return place;
     }
 }

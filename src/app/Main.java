@@ -1,23 +1,25 @@
 package app;
 
-import data_access.CheckDelaysDataAccessObject;
+import data_access.ClosestStopsDataAccessObject;
 import data_access.NextDeparturesDataAccessObject;
+import data_access.CheckDelaysDataAccessObject;
 import data_access.PlanATripDataAccessObject;
+
 import interface_adapter.ViewManagerModel;
+import interface_adapter.closest_stops.ClosestStopsViewModel;
 import interface_adapter.next_departures.NextDeparturesViewModel;
-import interface_adapter.plan_a_trip.PlanATripViewModel;
 import interface_adapter.check_delays.CheckDelaysViewModel;
+import interface_adapter.plan_a_trip.PlanATripViewModel;
+
+import use_case.closest_stops.ClosestStopsDataAccessInterface;
 import use_case.next_departures.NextDeparturesDataAccessInterface;
-import use_case.plan_a_trip.PlanATripDataAccessInterface;
 import use_case.check_delays.CheckDelaysDataAccessInterface;
-import view.CheckDelaysView;
-import view.NextDeparturesView;
-import view.PlanATripView;
-import view.ViewManager;
+import use_case.plan_a_trip.PlanATripDataAccessInterface;
+
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,10 +38,12 @@ public class Main {
         NextDeparturesViewModel nextDepartureViewModel = new NextDeparturesViewModel();
         PlanATripViewModel planATripViewModel = new PlanATripViewModel();
         CheckDelaysViewModel checkDelaysViewModel = new CheckDelaysViewModel();
+        ClosestStopsViewModel closestStopsViewModel = new ClosestStopsViewModel();
 
         NextDeparturesDataAccessInterface nextDepartureDataAccessInterface = new NextDeparturesDataAccessObject();
         PlanATripDataAccessInterface planATripDataAccessInterface = new PlanATripDataAccessObject();
         CheckDelaysDataAccessInterface checkDelaysDataAccessInterface = new CheckDelaysDataAccessObject();
+        ClosestStopsDataAccessInterface closestStopsDataAccessInterface = new ClosestStopsDataAccessObject();
 
         NextDeparturesView nextDepartureView = NextDeparturesUseCaseFactory.create(viewManagerModel, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(nextDepartureView, nextDepartureView.viewName);
@@ -50,7 +54,17 @@ public class Main {
         CheckDelaysView checkDelaysView = CheckDelaysUseCaseFactory.create(viewManagerModel, checkDelaysViewModel, checkDelaysDataAccessInterface);
         views.add(checkDelaysView, checkDelaysView.viewName);
 
-        viewManagerModel.setActiveView(planATripView.viewName);
+        ClosestStopsView closestStopsView = ClosestStopsUseCaseFactory.createClosestStopsView(
+                viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface, nextDepartureViewModel, nextDepartureDataAccessInterface);
+        views.add(closestStopsView, closestStopsView.viewName);
+
+        LonLatView lonLatView = ClosestStopsUseCaseFactory.createLonLatView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);
+        views.add(lonLatView, lonLatView.viewName);
+
+        MainMenuView mainMenuView = new MainMenuView(viewManagerModel);
+        views.add(mainMenuView, mainMenuView.viewName);
+
+        viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
