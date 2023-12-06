@@ -2,6 +2,7 @@ package use_case.next_departures;
 
 import entity.Route;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +20,11 @@ public class NextDeparturesInteractor implements NextDeparturesInputBoundary {
     @Override
     public void execute(NextDeparturesInputData nextDeparturesInputData) {
         List<Route> routes = nextDepartureDataAccessObject.getNextDeparturesByRoute(nextDeparturesInputData.getId(), nextDeparturesInputData.getTime());
-        NextDeparturesOutputData nextDepartureOutputData = null;
-        HashMap<String, ArrayList<Integer>> departureTimes = null;
+        NextDeparturesOutputData nextDepartureOutputData;
+        HashMap<String, ArrayList<LocalDateTime>> departureTimes = new HashMap<>();
         for (Route route : routes) {
-            ArrayList<Integer> routeDepartureTimes = route.getDepartureTimes();
-            departureTimes.put(route.getid(), routeDepartureTimes);
+            ArrayList<LocalDateTime> routeDepartureTimes = route.getDepartureTimes();
+            departureTimes.put(route.getName(), routeDepartureTimes);
         }
         nextDepartureOutputData = new NextDeparturesOutputData(departureTimes, false);
         nextDeparturePresenter.prepareSuccessView(nextDepartureOutputData);

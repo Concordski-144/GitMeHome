@@ -1,12 +1,15 @@
 package interface_adapter.next_departures;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class NextDeparturesState {
     private String stationID = "";
-    private Integer time = null;
+    private String time = null;
     private String stationIDError = "";
-    private ArrayList<Integer> departureTime;
+    private HashMap<String, ArrayList<LocalDateTime>> departureTime;
 
     public NextDeparturesState (NextDeparturesState copy) {
         stationID = copy.stationID;
@@ -20,11 +23,11 @@ public class NextDeparturesState {
         this.stationID = stationID;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public void setDepartureTime(ArrayList<Integer> departureTime) {
+    public void setDepartureTime(HashMap<String, ArrayList<LocalDateTime>> departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -32,11 +35,11 @@ public class NextDeparturesState {
         this.stationIDError = stationIDError;
     }
 
-    public ArrayList<Integer> getDepartureTime() {
+    public HashMap<String, ArrayList<LocalDateTime>> getDepartureTime() {
         return departureTime;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -50,9 +53,13 @@ public class NextDeparturesState {
 
     @Override
     public String toString(){
-        return "NextDeparturesState{" +
-                "stationID= " + stationID + '\'' +
-                ", departure time= " + time + '\'' +
-                "}";
+        String output = "Next Departures:" + '\n';
+        for (String route : departureTime.keySet()) {
+            output += " Route: " + route + '\n';
+            for (LocalDateTime time : departureTime.get(route)) {
+                output += "  " + time + '\n';
+            }
+        }
+        return output;
     }
 }
