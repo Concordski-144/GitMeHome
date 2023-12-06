@@ -26,7 +26,8 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
     private final JTextField stationIDInputField = new JTextField(15);
     private final CheckDelaysController checkDelaysController;
 
-    private final JButton nextDeparture;
+    private final JButton checkDelays;
+    private final JButton checkDelaysByRoute;
     private final JButton cancel;
 
     public CheckDelaysView(ViewManagerModel viewManagerModel, CheckDelaysController controller, CheckDelaysViewModel viewModel) {
@@ -43,16 +44,20 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
 
 
         JPanel buttons = new JPanel();
-        nextDeparture = new JButton(CheckDelaysViewModel.CHECK_DELAYS_BUTTON_LABEL);
-        buttons.add(nextDeparture);
+        checkDelays = new JButton(CheckDelaysViewModel.CHECK_DELAYS_BUTTON_LABEL);
+        buttons.add(checkDelays);
+
+        checkDelaysByRoute = new JButton(CheckDelaysViewModel.CHECK_DELAYS_BY_ROUTE_BUTTON_LABEL);
+        buttons.add(checkDelaysByRoute);
+        
         cancel = new JButton(CheckDelaysViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
-        nextDeparture.addActionListener(
+        checkDelays.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(nextDeparture)) {
+                        if (evt.getSource().equals(checkDelays)) {
                             CheckDelaysState currentState = checkDelaysViewModel.getState();
                             checkDelaysController.execute(
                                     currentState.getStationID(), currentState.getType()
@@ -63,6 +68,20 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
+        checkDelaysByRoute.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(checkDelaysByRoute)) {
+                            CheckDelaysState currentState = checkDelaysViewModel.getState();
+                            checkDelaysController.execute(
+                                    currentState.getStationID(), currentState.getType()
+                            );
+                            JOptionPane.showMessageDialog(title, currentState.toString());
+                        }
+                    }
+                }
+        );
 
         cancel.addActionListener(
                 new ActionListener() {
