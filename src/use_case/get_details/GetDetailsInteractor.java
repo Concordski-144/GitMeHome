@@ -3,6 +3,9 @@ package use_case.get_details;
 import use_case.get_details.GetDetailsDataAccessInterface;
 import use_case.get_details.GetDetailsOutputBoundary;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class GetDetailsInteractor implements GetDetailsInputBoundary{
     final GetDetailsDataAccessInterface getDetailsDataAccessObject;
     final GetDetailsOutputBoundary getDetailsPresenter;
@@ -13,6 +16,8 @@ public class GetDetailsInteractor implements GetDetailsInputBoundary{
     }
     @Override
     public void execute(GetDetailsInputData getDetailsInputData) {
-        
+        ArrayList<String> details = getDetailsDataAccessObject.getDetails(getDetailsInputData.getRouteID(), getDetailsInputData.isWithDepartureTime());
+        GetDetailsOutputData getDetailsOutputData = new GetDetailsOutputData(details, false);
+        getDetailsPresenter.prepareSuccessView(getDetailsOutputData);
     }
 }
