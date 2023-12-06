@@ -39,11 +39,11 @@ public class NextDeparturesInteractorTest {
             @Override
             public void prepareSuccessView(NextDeparturesOutputData user) {
                 assertEquals(LocalDateTime.ofEpochSecond(1701713160, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(0));
+                        user.getDeparturesByRoute().get("13 Avenue Road").get(0));
                 assertEquals(LocalDateTime.ofEpochSecond(1701714960, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(1));
+                        user.getDeparturesByRoute().get("13 Avenue Road").get(1));
                 assertEquals(LocalDateTime.ofEpochSecond(1701716760, 0, OffsetDateTime.now().getOffset()),
-                        user.getDeparturesByRoute().get("TTC:138961").get(2));
+                        user.getDeparturesByRoute().get("13 Avenue Road").get(2));
             }
 
             @Override
