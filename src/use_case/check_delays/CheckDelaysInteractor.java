@@ -20,23 +20,19 @@ public class CheckDelaysInteractor implements CheckDelaysInputBoundary {
 
     @Override
     public void execute(CheckDelaysInputData checkDelaysInputData) {
-        //temporarily disabled due to bug in DAO
-//        ArrayList<Delay> delays = checkDelaysDataAccessObject.checkDelaysByRoute(checkDelaysInputData.getId());
-
-//        CheckDelaysOutputData checkDelaysOutputData = null;
-//        HashMap<String, String> delayStatus = null;
-//        for (Delay delay : delays) {
-//            String routeDelayStatus = delay.getDelayStatus();
-//            delayStatus.put(delay.getid(), routeDelayStatus);
-//        }
         try {
-            boolean delayStatus = checkDelaysDataAccessObject.checkDelaysByStation(checkDelaysInputData.getId());
-            CheckDelaysOutputData checkDelaysOutputData = new CheckDelaysOutputData(delayStatus, false);
-            checkDelaysPresenter.prepareSuccessView(checkDelaysOutputData);
+            if (checkDelaysInputData.getType() == "route") { // check by route
+                boolean delayStatus = checkDelaysDataAccessObject.checkDelaysByRoute(checkDelaysInputData.getId());
+                CheckDelaysOutputData checkDelaysOutputData = new CheckDelaysOutputData(delayStatus, true);
+                checkDelaysPresenter.prepareSuccessView(checkDelaysOutputData);
+            } else { // check by station
+                boolean delayStatus = checkDelaysDataAccessObject.checkDelaysByStation(checkDelaysInputData.getId());
+                CheckDelaysOutputData checkDelaysOutputData = new CheckDelaysOutputData(delayStatus, false);
+                checkDelaysPresenter.prepareSuccessView(checkDelaysOutputData);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             checkDelaysPresenter.prepareFailView("Error: " + e.getMessage());
         }
-
     }
 }

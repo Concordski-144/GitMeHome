@@ -8,9 +8,10 @@ import java.beans.PropertyChangeSupport;
 
 public class CheckDelaysViewModel extends ViewModel {
 
-    public static final String CHECK_DELAYS_BUTTON_LABEL = "Check Delays";
+    public static final String CHECK_DELAYS_BUTTON_LABEL = "Check Delays by StationID";
+    public static final String CHECK_DELAYS_BY_ROUTE_BUTTON_LABEL = "Check Delays by RouteID";
     public static final String TITLE_LABEL = "Check Delay View";
-    public static final String STATIONID_LABEL = "Choose StationID";
+    public static final String STATIONID_LABEL = "Enter StationID or RouteID";
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 

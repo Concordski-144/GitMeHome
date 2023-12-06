@@ -15,6 +15,7 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
 
     private final JButton planATrip;
     private final JButton nextDeparture;
+    private final JButton checkDelays;
     private final JButton closestStops;
     private final JButton checkDelays;
     private final JButton cancel;
@@ -31,13 +32,14 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
         buttons.add(nextDeparture);
         planATrip = new JButton("Plan a trip");
         buttons.add(planATrip);
+        checkDelays = new JButton("Check for delays");
+        buttons.add(checkDelays);
         closestStops = new JButton("Find closest stops to your location");
         buttons.add(closestStops);
         cancel = new JButton("Cancel");
         buttons.add(cancel);
-        checkDelays = new JButton("Check for delays");
-        buttons.add(checkDelays);
-        buttons.setLayout(new GridLayout(4, 0));
+
+        buttons.setLayout(new GridLayout(5, 0));
 
         nextDeparture.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -57,6 +59,18 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(planATrip)) {
                             viewManagerModel.setActiveView("plan a trip");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+
+        checkDelays.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(checkDelays)) {
+                            viewManagerModel.setActiveView("check delays");
                             viewManagerModel.firePropertyChanged();
                         }
                     }

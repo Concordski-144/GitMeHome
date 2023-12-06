@@ -51,9 +51,19 @@ public class CheckDelaysState {
     @Override
     public String toString(){
         if (delayed) {
-            return "Lines at " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
-        } else {
-            return "There is no delay at " + stationID.substring(0, stationID.length() - 1) + ".";
+            if (queryType.equals("route")) {
+                return "Line " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
+            }
+            else { // queryType == "station"
+                return "Lines at " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
+            }
+        } else { // not delayed
+            if (queryType.equals("route")) {
+                return "There is no delay with " + stationID.substring(0, stationID.length() - 1) + ".";
+            }
+            else { // queryType == "station"
+                return "There is no delay at " + stationID.substring(0, stationID.length() - 1) + ".";
+            }
         }
     }
 }
