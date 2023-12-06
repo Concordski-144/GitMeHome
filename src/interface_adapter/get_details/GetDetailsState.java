@@ -1,7 +1,5 @@
 package interface_adapter.get_details;
 
-import interface_adapter.next_departures.NextDepartureState;
-
 public class GetDetailsState {
     private String routeID = "";
     private String routeIDError = null;
