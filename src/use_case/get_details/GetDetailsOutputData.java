@@ -6,4 +6,8 @@ public class GetDetailsOutputData {
 
     private boolean useCaseFailed;
 
+    public GetDetailsOutputData(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
 }
