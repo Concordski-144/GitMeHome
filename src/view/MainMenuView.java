@@ -17,7 +17,6 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
     private final JButton nextDeparture;
     private final JButton checkDelays;
     private final JButton closestStops;
-    private final JButton checkDelays;
     private final JButton cancel;
 
     public MainMenuView(ViewManagerModel viewManagerModel) {

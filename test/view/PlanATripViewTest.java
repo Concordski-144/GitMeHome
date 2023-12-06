@@ -61,7 +61,7 @@ public class PlanATripViewTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        MainMenuView sv = (MainMenuView) jp2.getComponent(4);
+        MainMenuView sv = (MainMenuView) jp2.getComponent(5);
 
         JPanel buttons = (JPanel) sv.getComponent(1);
 
