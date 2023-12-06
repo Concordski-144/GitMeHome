@@ -26,7 +26,7 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
     private final JTextField stationIDInputField = new JTextField(15);
     private final CheckDelaysController checkDelaysController;
 
-    private final JButton checkDelays;
+    private final JButton checkDelays;  // by stationID
     private final JButton checkDelaysByRoute;
     private final JButton cancel;
 
@@ -59,6 +59,7 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(checkDelays)) {
                             CheckDelaysState currentState = checkDelaysViewModel.getState();
+                            currentState.setQueryType("station");
                             checkDelaysController.execute(
                                     currentState.getStationID(), currentState.getType()
                             );
@@ -74,6 +75,7 @@ public class CheckDelaysView extends JPanel implements ActionListener, PropertyC
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(checkDelaysByRoute)) {
                             CheckDelaysState currentState = checkDelaysViewModel.getState();
+                            currentState.setQueryType("route");
                             checkDelaysController.execute(
                                     currentState.getStationID(), currentState.getType()
                             );
