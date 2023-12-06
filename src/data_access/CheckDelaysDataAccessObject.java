@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/route_details";
+    public static final String API_URL_BY_STATION = "https://external.transitapp.com/v3/public/stop_departures";
     public String API_KEY = "";
 
     public String getApiKey() {
@@ -70,7 +71,42 @@ public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterfa
     }
 
     @Override
-    public boolean checkDelaysByStation(String id) {
+    public boolean checkDelaysByStation(String id) throws RuntimeException {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder()
+                .url(String.format(API_URL + "?global_stop_id=%s", id))
+                .addHeader("apiKey", API_KEY)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            System.out.println(response);
+            assert response.body() != null;
+            JSONObject responseBody = new JSONObject(response.body().string());
+
+            if (response.code() == 200) {
+                JSONArray allRoutesArray = responseBody.getJSONArray("route_departures");
+                ArrayList<Route> routes = new ArrayList<Route>();
+
+                for (int i = 0; i < allRoutesArray.length(); i++){
+                    JSONObject routeObject = allRoutesArray.getJSONObject(i);
+
+                    JSONArray scheduleArray = routeObject.getJSONArray("itineraries")
+                            .getJSONObject(0).getJSONArray("schedule_items");
+
+                    for (int j = 0; j < scheduleArray.length(); j++) {
+                        if (scheduleArray.getJSONObject(j).getBoolean("is_cancelled")) {
+                            return true;
+                        } else if (scheduleArray.getJSONObject(j).getInt("scheduled_departure_time") != scheduleArray.getJSONObject(j).getInt("departure_time")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
         return false;
     }
 }
