@@ -16,7 +16,7 @@ public class GetDetailsViewModel extends ViewModel{
     public static final String WITH_DEPARTURE_TIME_BUTTON_LABEL = "Show Departure Time";
     private GetDetailsState state = new GetDetailsState();
 
-    public GetDetailsViewModel(String viewName) {
+    public GetDetailsViewModel() {
         super("get details");
     }
 
