@@ -16,7 +16,6 @@ import use_case.next_departures.NextDeparturesInputBoundary;
 import use_case.next_departures.NextDeparturesInteractor;
 import use_case.next_departures.NextDeparturesOutputBoundary;
 import view.ClosestStopsView;
-import view.LonLatView;
 
 import javax.swing.*;
 
@@ -40,18 +39,7 @@ public class ClosestStopsUseCaseFactory {
         return null;
     }
 
-    public static LonLatView createLonLatView(
-            ViewManagerModel viewManagerModel,
-            ClosestStopsViewModel closestStopsViewModel,
-            ClosestStopsDataAccessInterface closestStopsDataAccessObject) {
-        try {
-            ClosestStopsController closestStopsController = createClosestStopsUseCase(viewManagerModel, closestStopsViewModel, closestStopsDataAccessObject);
-            return new LonLatView(viewManagerModel, closestStopsController, closestStopsViewModel);
-        } catch (RuntimeException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        return null;
-    }
+
 
 
     private static ClosestStopsController createClosestStopsUseCase(

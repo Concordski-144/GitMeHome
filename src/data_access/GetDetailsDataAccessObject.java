@@ -33,7 +33,7 @@ public class GetDetailsDataAccessObject implements GetDetailsDataAccessInterface
     public ArrayList<String> getDetails(String id, boolean departure) throws RuntimeException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
-                .url(String.format("https://external.transitapp.com/v3/public/route_details?global_stop_id=%s&time=%s", id, departure))
+                .url(String.format("https://external.transitapp.com/v3/public/route_details?global_route_id=%s&include_next_departure=%s", id, departure))
                 .addHeader("apiKey", API_KEY)
                 .build();
         try {
@@ -48,23 +48,33 @@ public class GetDetailsDataAccessObject implements GetDetailsDataAccessInterface
                 JSONObject route = responseBody.getJSONObject("route");
                 String routeName = route.getString("route_short_name") + " "
                         + route.getString("route_long_name");
-                boolean isActive = itineraries.getBoolean(8);
+                boolean isActive = itineraries.getJSONObject(0).getBoolean("is_active");
                 int routeType = route.getInt("route_type");
                 String routeColor = route.getString("route_color");
                 details.add(routeName);
-                details.add(Boolean.toString(isActive));
+                if (isActive){
+                    details.add("Active");
+                }
+                else{
+                    details.add("NotActive");
+                }
                 details.add(String.valueOf(routeType));
                 details.add(routeColor);
                 JSONArray stations = itineraries.getJSONObject(0).getJSONArray("stops");
-                int departure_time = itineraries.getJSONObject(0).getInt("departure_time");
-                for (int i = 0; i < stations.length(); i++) {
-                    details.add(stations.getJSONObject(i).getString("stop_name"));
+
+                details.add("stops listed below:");
+                if (departure) {
+                    for (int i = 0; i < stations.length(); i++) {
+                        int time = stations.getJSONObject(i).getJSONObject("next_departure").getInt("departure_time");
+                        LocalDateTime localDateTime =
+                                LocalDateTime.ofEpochSecond(time,0, OffsetDateTime.now().getOffset());
+                        details.add(stations.getJSONObject(i).getString("stop_name") + " " + localDateTime.toString());
+                    }
                 }
-                if (departure){
-                    LocalDateTime localDateTime =
-                            LocalDateTime.ofEpochSecond(departure_time,
-                                    0, OffsetDateTime.now().getOffset());
-                    details.add(localDateTime.toString());
+                else{
+                    for (int i = 0; i < stations.length(); i++) {
+                        details.add(stations.getJSONObject(i).getString("stop_name"));
+                    }
                 }
                 return details;
 

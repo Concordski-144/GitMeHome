@@ -63,9 +63,6 @@ public class Main {
                 viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface, nextDepartureViewModel, nextDepartureDataAccessInterface);
         views.add(closestStopsView, closestStopsView.viewName);
 
-        LonLatView lonLatView = ClosestStopsUseCaseFactory.createLonLatView(viewManagerModel, closestStopsViewModel, closestStopsDataAccessInterface);
-        views.add(lonLatView, lonLatView.viewName);
-
         GetDetailsView getDetailsView = GetDetailsUseCaseFactory.create(viewManagerModel, getDetailsViewModel, getDetailsDataAccessInterface);
         views.add(getDetailsView, getDetailsView.viewName);
 
