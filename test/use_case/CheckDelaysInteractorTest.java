@@ -32,6 +32,16 @@ public class CheckDelaysInteractorTest {
                         throw new RuntimeException("Error: Invalid route ID");
                 }
             }
+
+            @Override
+            public String getRouteName() {
+                return "Test Route";
+            }
+
+            @Override
+            public String getStationName() {
+                return "Test Station";
+            }
         };
 
         CheckDelaysOutputBoundary checkDelaysPresenterDelayed = new CheckDelaysOutputBoundary() {

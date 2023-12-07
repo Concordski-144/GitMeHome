@@ -20,6 +20,7 @@ public class CheckDelaysPresenter implements CheckDelaysOutputBoundary {
         CheckDelaysState checkDelaysState = checkDelaysViewModel.getState();
         checkDelaysState.setStationID(checkDelaysState.getStationID());
         checkDelaysState.setQueryType(checkDelaysState.getType());
+        checkDelaysState.setName(response.getName());
         checkDelaysState.setDelayStatus(checkDelaysState.getDelayStatus());
         checkDelaysViewModel.firePropertyChanged();
     }
