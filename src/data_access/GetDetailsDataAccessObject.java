@@ -19,7 +19,7 @@ import java.util.List;
 
 public class GetDetailsDataAccessObject implements GetDetailsDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/route_details";
-    public static String API_KEY = "1c069f93e535f58bf385122d580d43b4bcbaa3df234cac14ceb62dcb6e7ce7a4";
+    public static String API_KEY = "";
 
     public void setApiKey(String apiKey) {
         API_KEY = apiKey;

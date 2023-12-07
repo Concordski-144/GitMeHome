@@ -41,7 +41,7 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
         cancel = new JButton("Cancel");
         buttons.add(cancel);
 
-        buttons.setLayout(new GridLayout(5, 0));
+        buttons.setLayout(new GridLayout(6, 0));
 
         nextDeparture.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
