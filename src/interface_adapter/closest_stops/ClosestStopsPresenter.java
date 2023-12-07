@@ -30,7 +30,5 @@ public class ClosestStopsPresenter implements ClosestStopsOutputBoundary {
         closestStopsState.setClosestStopsError(error);
         closestStopsViewModel.firePropertyChanged();
         // On failure show error instead of info
-        viewManagerModel.setActiveView(closestStopsViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 }

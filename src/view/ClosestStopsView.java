@@ -27,6 +27,13 @@ public class ClosestStopsView extends JPanel implements ActionListener, Property
     private final NextDeparturesController nextDeparturesController;
     private final String invalidStopError = "Invalid stop";
     private JButton backToMenu = new JButton("Back");
+
+
+    // for testing purposes
+    public JLabel getStopLabel1() {
+        return stopLabel1;
+    }
+
     private final JLabel stopLabel1 = new JLabel();
     private final JLabel stopLabel2 = new JLabel();
     private final JLabel stopLabel3 = new JLabel();
