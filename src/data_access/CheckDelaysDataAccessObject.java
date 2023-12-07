@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterface {
     public static final String API_URL = "https://external.transitapp.com/v3/public/route_details";
     public static final String API_URL_BY_STATION = "https://external.transitapp.com/v3/public/stop_departures";
-    public static final String API_URL_STATION_NAME = "https://external.transitapp.com/v3/stops/search_stops";
+    public static final String API_URL_STATION_NAME = "https://external.transitapp.com/v3/public/search_stops";
     public String lat = "43.6619003";
     public String lon = "-79.3914503";
     public String searchQuery = "";
     public String API_KEY = "";
     public String routeName = "";
-    public String stationName = "";
+    public String stationName = "the Station";
 
     public String getApiKey() {
         return API_KEY;
@@ -108,8 +108,9 @@ public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterfa
                     JSONArray allResultsArray = nameResponseBody.getJSONArray("results");
                     for (int i = 0; i < allResultsArray.length(); i++) {
                         JSONObject resultObject = allResultsArray.getJSONObject(i);
-                        if (resultObject.getString("global_stop_id").equals(id) || resultObject.getString("stop_id").equals(id)) {
+                        if (resultObject.getString("global_stop_id").equals(id.substring(0, id.length() - 1)) || resultObject.getString("parent_station_global_stop_id").equals(id.substring(0, id.length() - 1))) {
                             stationName = resultObject.getString("stop_name");
+                            break;
                         }
                     }
                 } catch (IOException | JSONException e) {
