@@ -15,9 +15,4 @@ public class GetDetailsOutputData {
     public ArrayList<String> getDetails() {
         return details;
     }
-
-    public GetDetailsOutputData(String name, String type) {
-        this.name = name;
-        this.type = type;
-    }
 }

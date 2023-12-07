@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class CheckDelaysState {
     private String stationID = "";
     private String queryType = "";
+    private String name = "";
     private String stationIDError = "";
     private boolean delayed;
 
@@ -22,6 +23,9 @@ public class CheckDelaysState {
 
     public void setQueryType(String queryType) {
         this.queryType = queryType;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDelayStatus(boolean delayed) {
@@ -52,17 +56,17 @@ public class CheckDelaysState {
     public String toString(){
         if (delayed) {
             if (queryType.equals("route")) {
-                return "Line " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
+                return name + " is delayed. (" + stationID + ")";
             }
             else { // queryType == "station"
-                return "Lines at " + stationID.substring(0, stationID.length() - 1) + " is delayed.";
+                return "There is a delay at " + name + ". (" + stationID + ")";
             }
         } else { // not delayed
             if (queryType.equals("route")) {
-                return "There is no delay with " + stationID.substring(0, stationID.length() - 1) + ".";
+                return name + " has no delays. (" + stationID + ")";
             }
             else { // queryType == "station"
-                return "There is no delay at " + stationID.substring(0, stationID.length() - 1) + ".";
+                return "There are no delays at " + name + ". (" + stationID + ")";
             }
         }
     }

@@ -29,6 +29,10 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
     private final JButton departuretime;
     public boolean withDepartureTime = false;
 
+    public boolean isWithDepartureTime() {
+        return withDepartureTime;
+    }
+
     public GetDetailsView(GetDetailsController controller, GetDetailsViewModel viewModel, ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
         this.getDetailsController = controller;
@@ -41,13 +45,18 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
         LabelTextPanel routeIDInfo = new LabelTextPanel(
                 new JLabel(GetDetailsViewModel.ROUTEID_LABEL), routeIDInputField);
 
+        final JLabel label1 = new JLabel("With Departure Times");
+        final JLabel label2 = new JLabel("Without Departure Times");
+        label1.setVisible(false);
+        label2.setVisible(true);
+
 
         JPanel buttons = new JPanel();
         getDetails = new JButton(GetDetailsViewModel.GET_DETAILS_BUTTON_LABEL);
         buttons.add(getDetails);
         cancel = new JButton(GetDetailsViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-        departuretime = new JButton(GetDetailsViewModel.GET_DETAILS_BUTTON_LABEL);
+        departuretime = new JButton(GetDetailsViewModel.WITH_DEPARTURE_TIME_BUTTON_LABEL);
         buttons.add(departuretime);
 
         getDetails.addActionListener(
@@ -66,7 +75,17 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
         );
 
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+                            viewManagerModel.setActiveView("main menu");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
         // This makes a new KeyListener implementing class, instantiates it, and
         // makes it listen to keystrokes in the usernameInputField.
@@ -97,8 +116,16 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(departuretime)) {
                             GetDetailsState currentState = getDetailsViewModel.getState();
-                            if (withDepartureTime){withDepartureTime = false;}
-                            else{withDepartureTime = true;}
+                            if (withDepartureTime){
+                                withDepartureTime = false;
+                                label2.setVisible(true);
+                                label1.setVisible(false);
+                            }
+                            else{
+                                withDepartureTime = true;
+                                label1.setVisible(true);
+                                label2.setVisible(false);
+                            }
                             currentState.setWithDepartures(withDepartureTime);
                         }
 
@@ -106,6 +133,11 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
                 }
 
         );
+        this.add(label1);
+        this.add(label2);
+        this.add(title);
+        this.add(buttons);
+        this.add(routeIDInfo);
     }
 
     public void actionPerformed(ActionEvent evt) {

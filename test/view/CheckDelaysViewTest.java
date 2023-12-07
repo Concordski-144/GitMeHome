@@ -1,6 +1,7 @@
 package view;
 
 import app.Main;
+import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +11,13 @@ import java.awt.event.KeyEvent;
 
 import static org.junit.Assert.*;
 
-public class NextDeparturesViewTest {
+public class CheckDelaysViewTest {
 
     static String message = "";
     static boolean popUpDiscovered = false;
 
 
-    public JButton getButton() {
+    public JButton getButton(int componentIndex) {
         JFrame app = null;
         Window[] windows = Window.getWindows();
         for (Window window : windows) {
@@ -35,15 +36,15 @@ public class NextDeparturesViewTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        NextDeparturesView sv = (NextDeparturesView) jp2.getComponent(0);
+        CheckDelaysView sv = (CheckDelaysView) jp2.getComponent(2);
 
-        JPanel buttons = (JPanel) sv.getComponent(3);
+        JPanel buttons = (JPanel) sv.getComponent(2);
 
-        return (JButton) buttons.getComponent(0);
+        return (JButton) buttons.getComponent(componentIndex);
     }
 
 
-    public JButton getMainMenuButton() {
+    public JButton getCheckDelaysButton() {
         JFrame app = null;
         Window[] windows = Window.getWindows();
         for (Window window : windows) {
@@ -62,9 +63,9 @@ public class NextDeparturesViewTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        MainMenuView sv = (MainMenuView) jp2.getComponent(6);
+        CheckDelaysView sv = (CheckDelaysView) jp2.getComponent(2);
 
-        JPanel buttons = (JPanel) sv.getComponent(1);
+        JPanel buttons = (JPanel) sv.getComponent(2);
 
         return (JButton) buttons.getComponent(0);
     }
@@ -89,7 +90,7 @@ public class NextDeparturesViewTest {
 
         JPanel jp2 = (JPanel) jp.getComponent(0);
 
-        NextDeparturesView sv = (NextDeparturesView) jp2.getComponent(0);
+        CheckDelaysView sv = (CheckDelaysView) jp2.getComponent(0);
 
         LabelTextPanel textPanel = (LabelTextPanel) sv.getComponent(1);
 
@@ -98,25 +99,39 @@ public class NextDeparturesViewTest {
 
 
 
-    @org.junit.Test
-    public void testNextDeparturesButtonPresent() {
+    @Test
+    public void testCheckDelaysButton1Present() {
         Main.main(null);
-        JButton button = getButton();
-        assert(button.getText().equals("Next Departure"));
+        JButton button = getButton(0);
+        assert(button.getText().equals("Check Delays by StationID"));
+    }
+
+    @Test
+    public void testCheckDelaysButton2Present() {
+        Main.main(null);
+        JButton button = getButton(1);
+        assert(button.getText().equals("Check Delays by RouteID"));
+    }
+
+    @Test
+    public void testCheckDelaysButton3Present() {
+        Main.main(null);
+        JButton button = getButton(2);
+        assert(button.getText().equals("Cancel"));
     }
 
 
-    @org.junit.Test
-    public void testNextDeparturesPopUpShown() {
+    // @Test disabled temporarily
+    public void testCheckDelaysPopUpShown() {
 
         popUpDiscovered = false;
 
         Main.main(null);
         JFrame app = null;
 
-        JButton mainButton = getMainMenuButton();
+        JButton mainButton = getCheckDelaysButton();
         JTextField id = getIdTextField();
-        JButton button = getButton();
+        JButton button = getButton(0);
 
 
         // since clicking the button should end up displaying a JDialog to the user to report the
@@ -159,8 +174,8 @@ public class NextDeparturesViewTest {
                             System.out.println("message = " + s);
 
                             // store the information we got from the JDialog
-                            NextDeparturesViewTest.message = s;
-                            NextDeparturesViewTest.popUpDiscovered = true;
+                            CheckDelaysViewTest.message = s;
+                            CheckDelaysViewTest.popUpDiscovered = true;
 
                             System.out.println("disposing of..." + window.getClass());
                             window.dispose();

@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 
 public class GetDetailsViewModel extends ViewModel{
     public static final String GET_DETAILS_BUTTON_LABEL = "Get Details";
-    public static final String ROUTEID_LABEL = "Choose StationID";
+    public static final String ROUTEID_LABEL = "Choose Route ID";
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
     public static final String WITH_DEPARTURE_TIME_BUTTON_LABEL = "Show Departure Time";
