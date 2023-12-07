@@ -56,17 +56,17 @@ public class CheckDelaysState {
     public String toString(){
         if (delayed) {
             if (queryType.equals("route")) {
-                return name + " is delayed. (" + stationID.substring(0, stationID.length() - 1) + ")";
+                return name + " is delayed. (" + stationID + ")";
             }
             else { // queryType == "station"
-                return "There is a delay at " + name + ". (" + stationID.substring(0, stationID.length() - 1) + ")";
+                return "There is a delay at " + name + ". (" + stationID + ")";
             }
         } else { // not delayed
             if (queryType.equals("route")) {
-                return name + " has no delays. (" + stationID.substring(0, stationID.length() - 1) + ")";
+                return name + " has no delays. (" + stationID + ")";
             }
             else { // queryType == "station"
-                return "There are no delays at " + name + ". (" + stationID.substring(0, stationID.length() - 1) + ")";
+                return "There are no delays at " + name + ". (" + stationID + ")";
             }
         }
     }

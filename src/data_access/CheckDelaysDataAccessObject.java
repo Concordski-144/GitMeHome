@@ -108,7 +108,7 @@ public class CheckDelaysDataAccessObject implements CheckDelaysDataAccessInterfa
                     JSONArray allResultsArray = nameResponseBody.getJSONArray("results");
                     for (int i = 0; i < allResultsArray.length(); i++) {
                         JSONObject resultObject = allResultsArray.getJSONObject(i);
-                        if (resultObject.getString("global_stop_id").equals(id.substring(0, id.length() - 1)) || resultObject.getString("parent_station_global_stop_id").equals(id.substring(0, id.length() - 1))) {
+                        if (resultObject.getString("global_stop_id").equals(id) || resultObject.getString("parent_station_global_stop_id").equals(id)) {
                             stationName = resultObject.getString("stop_name");
                             break;
                         }
