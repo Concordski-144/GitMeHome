@@ -7,4 +7,8 @@ public interface CheckDelaysDataAccessInterface {
     boolean checkDelaysByRoute(String id);
 
     boolean checkDelaysByStation(String id);
+
+    String getRouteName();
+
+    String getStationName();
 }
