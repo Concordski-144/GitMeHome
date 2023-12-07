@@ -29,6 +29,10 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
     private final JButton departuretime;
     public boolean withDepartureTime = false;
 
+    public boolean isWithDepartureTime() {
+        return withDepartureTime;
+    }
+
     public GetDetailsView(GetDetailsController controller, GetDetailsViewModel viewModel, ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
         this.getDetailsController = controller;
