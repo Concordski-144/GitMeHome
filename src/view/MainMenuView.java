@@ -17,6 +17,7 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
     private final JButton nextDeparture;
     private final JButton closestStops;
     private final JButton cancel;
+    private final JButton getDetails;
 
     public MainMenuView(ViewManagerModel viewManagerModel) {
 
@@ -32,6 +33,8 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
         buttons.add(planATrip);
         closestStops = new JButton("Find closest stops to your location");
         buttons.add(closestStops);
+        getDetails = new JButton("Get details of a route");
+        buttons.add(getDetails);
         cancel = new JButton("Cancel");
         buttons.add(cancel);
         buttons.setLayout(new GridLayout(4, 0));
@@ -66,6 +69,18 @@ public class MainMenuView  extends JPanel implements ActionListener, PropertyCha
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(closestStops)) {
                             viewManagerModel.setActiveView("user location");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
+
+        getDetails.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(getDetails)){
+                            viewManagerModel.setActiveView("get details");
                             viewManagerModel.firePropertyChanged();
                         }
                     }
