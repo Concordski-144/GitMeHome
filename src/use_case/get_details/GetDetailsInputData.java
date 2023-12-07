@@ -1,15 +1,15 @@
 package use_case.get_details;
 
 public class GetDetailsInputData{
-    final private String stationID;
+    final private String routeID;
     final private boolean withDepartureTime;
     public GetDetailsInputData(String StationID, boolean WithDepartureTime){
-        this.stationID = StationID;
+        this.routeID = StationID;
         this.withDepartureTime = WithDepartureTime;
     }
 
-    String getStationID(){
-        return stationID;
+    String getRouteID(){
+        return routeID;
     }
     Boolean isWithDepartureTime(){return withDepartureTime;}
 }

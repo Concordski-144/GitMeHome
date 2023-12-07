@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.get_details.GetDetailsController;
 import interface_adapter.get_details.GetDetailsViewModel;
 import interface_adapter.get_details.GetDetailsState;
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 public class GetDetailsView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "get details";
+    private final ViewManagerModel viewManagerModel;
 
     private final GetDetailsViewModel getDetailsViewModel;
     private final JTextField routeIDInputField = new JTextField(15);
@@ -27,8 +29,8 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
     private final JButton departuretime;
     public boolean withDepartureTime = false;
 
-    public GetDetailsView(GetDetailsController controller, GetDetailsViewModel viewModel) {
-
+    public GetDetailsView(GetDetailsController controller, GetDetailsViewModel viewModel, ViewManagerModel viewManagerModel) {
+        this.viewManagerModel = viewManagerModel;
         this.getDetailsController = controller;
         this.getDetailsViewModel = viewModel;
         getDetailsViewModel.addPropertyChangeListener(this);
@@ -122,7 +124,13 @@ public class GetDetailsView extends JPanel implements ActionListener, PropertyCh
     public void propertyChange(PropertyChangeEvent evt) {
         if (Objects.equals(evt.getPropertyName(), "state")) {
             GetDetailsState state = (GetDetailsState) evt.getNewValue();
-
+            if (state.getRouteIDError() != null) {
+                JOptionPane.showMessageDialog(this, state.getRouteIDError());
+            }
+            else{
+                GetDetailsState state1 = (GetDetailsState) evt.getNewValue();
+                JOptionPane.showMessageDialog(this, state1.DetailsToString());
+            }
 
         }
     }
