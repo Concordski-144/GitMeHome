@@ -53,7 +53,6 @@ public class ClosestStopsUseCaseFactory {
         return null;
     }
 
-
     private static ClosestStopsController createClosestStopsUseCase(
             ViewManagerModel viewManagerModel,
             ClosestStopsViewModel closestStopsViewModel,
