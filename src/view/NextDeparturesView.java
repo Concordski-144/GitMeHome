@@ -142,8 +142,6 @@ public class NextDeparturesView extends JPanel implements ActionListener, Proper
     public void propertyChange(PropertyChangeEvent evt) {
         if (Objects.equals(evt.getPropertyName(), "state")) {
             NextDeparturesState state = (NextDeparturesState) evt.getNewValue();
-
-
         }
     }
 }
